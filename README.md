@@ -7,6 +7,8 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
 
+![Vicente Rijo institutional website preview](https://profbt.github.io/vicente-rijo/og.png)
+
 **English** | [Português](#português)
 
 ## Overview
