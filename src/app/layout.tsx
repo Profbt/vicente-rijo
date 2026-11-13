@@ -20,7 +20,7 @@ const playfair = Playfair_Display({
 const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL ?? (BASE_PATH ? "https://profbt.github.io" : "https://vicenterijo.com.br");
 const metadataBase = new URL(siteOrigin);
 const siteUrl = new URL(BASE_PATH || "/", metadataBase);
-const socialImage = new URL(`${BASE_PATH}/og-image.jpg`, metadataBase).toString();
+const socialImage = new URL(`${BASE_PATH}/og-image.png`, metadataBase).toString();
 
 export const metadata: Metadata = {
   metadataBase,
@@ -54,9 +54,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: socialImage,
-        width: 1200,
-        height: 630,
-        type: "image/jpeg",
+        width: 512,
+        height: 512,
+        type: "image/png",
         alt: "Colégio Estadual Vicente Rijo · 80 anos em Londrina",
       },
     ],
