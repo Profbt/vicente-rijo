@@ -1,9 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { HiLocationMarker, HiMail, HiPhone, HiPhotograph, HiOfficeBuilding, HiSparkles } from "react-icons/hi";
+import { HiLocationMarker, HiMail, HiPhone, HiPhotograph, HiOfficeBuilding } from "react-icons/hi";
 import { SCHOOL, withBasePath } from "@/lib/constants";
-
-const FULL_SITE_URL = "https://profbt.github.io/SITE_VR/";
 
 export default function Footer() {
   return (
@@ -64,15 +62,12 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <a
-                href={FULL_SITE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/"
                 className="inline-flex items-center gap-1.5 text-navy-100/70 transition-colors hover:text-white"
               >
-                <HiSparkles className="h-4 w-4" />
                 Site completo
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
