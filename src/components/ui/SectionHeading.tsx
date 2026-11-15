@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export default function SectionHeading({
   eyebrow,
   title,
@@ -5,9 +7,9 @@ export default function SectionHeading({
   dark = false,
   align = "center",
 }: {
-  eyebrow?: string;
+  eyebrow?: ReactNode;
   title: string;
-  description?: string;
+  description?: ReactNode;
   dark?: boolean;
   align?: "center" | "left";
 }) {

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu, HiX, HiExternalLink } from "react-icons/hi";
 import { withBasePath } from "@/lib/constants";
 
 const LINKS = [
@@ -13,6 +13,19 @@ const LINKS = [
   { label: "Conquistas", href: "/#conquistas" },
   { label: "Matrículas", href: "/#matriculas" },
   { label: "APMF", href: "/#apmf" },
+];
+
+const PORTALS = [
+  {
+    label: "Pais",
+    title: "Portal dos Pais",
+    href: "https://sites.google.com/escola.pr.gov.br/vicenterijoescolaonline/in%C3%ADcio",
+  },
+  {
+    label: "Alunos",
+    title: "Portal do Aluno",
+    href: "https://portaldoalunovr.vercel.app/",
+  },
 ];
 
 export default function Header() {
@@ -39,6 +52,24 @@ export default function Header() {
         scrolled ? "shadow-sm shadow-navy-950/5" : ""
       }`}
     >
+      <div className="hidden border-b border-white/10 bg-navy-950 lg:block">
+        <div className="mx-auto flex h-9 max-w-6xl items-center justify-end gap-6 px-4 sm:px-6">
+          {PORTALS.map((portal) => (
+            <a
+              key={portal.href}
+              href={portal.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={portal.title}
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-navy-100/75 transition-colors hover:text-gold-300"
+            >
+              <HiExternalLink className="h-3.5 w-3.5" aria-hidden />
+              {portal.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
@@ -102,6 +133,20 @@ export default function Header() {
               >
                 {link.label}
               </Link>
+            ))}
+            <div className="my-2 border-t border-navy-100" />
+            {PORTALS.map((portal) => (
+              <a
+                key={portal.href}
+                href={portal.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium text-navy-900/80 hover:bg-navy-50"
+              >
+                <HiExternalLink className="h-4 w-4 text-navy-800/50" aria-hidden />
+                {portal.title}
+              </a>
             ))}
             <Link
               href="/#matriculas"

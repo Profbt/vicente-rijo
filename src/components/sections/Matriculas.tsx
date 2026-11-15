@@ -7,10 +7,12 @@ import {
   HiQuestionMarkCircle,
 } from "react-icons/hi";
 import SectionHeading from "@/components/ui/SectionHeading";
+import EnrollmentYear from "@/components/ui/EnrollmentYear";
 import {
   MATRICULAS_STEPS,
   DOCS_NECESSARIOS,
   MATRICULAS_FAQ,
+  MATRICULAS_YEAR,
 } from "@/lib/constants";
 
 export default function Matriculas() {
@@ -18,7 +20,11 @@ export default function Matriculas() {
     <section id="matriculas" className="scroll-mt-20 bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
-          eyebrow="Matrículas 2026"
+          eyebrow={
+            <>
+              Matrículas <EnrollmentYear initial={MATRICULAS_YEAR} />
+            </>
+          }
           title="Matrícula simples, sem surpresas"
           description="O ensino é 100% gratuito. Veja como garantir a vaga do seu filho no Vicente Rijo."
         />

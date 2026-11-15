@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { HiLocationMarker, HiMail, HiPhone, HiPhotograph, HiOfficeBuilding } from "react-icons/hi";
-import { SCHOOL, withBasePath } from "@/lib/constants";
+import { HiLocationMarker, HiMail, HiPhone, HiPhotograph, HiOfficeBuilding, HiHeart } from "react-icons/hi";
+import { SCHOOL, SCHOOL_AGE, withBasePath } from "@/lib/constants";
+import SchoolAge from "@/components/ui/SchoolAge";
 
 export default function Footer() {
   return (
@@ -21,7 +22,7 @@ export default function Footer() {
                 Colégio Estadual Vicente Rijo
               </p>
               <p className="text-xs uppercase tracking-widest text-gold-300">
-                80 anos em Londrina
+                <SchoolAge initial={SCHOOL_AGE} /> anos em Londrina
               </p>
             </div>
           </div>
@@ -115,6 +116,20 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-navy-100/50 sm:flex-row sm:px-6">
           <p>© {new Date().getFullYear()} {SCHOOL.name} · {SCHOOL.city}, {SCHOOL.state}</p>
+          <p className="flex items-center gap-1.5">
+            Feito com{" "}
+            <span className="sr-only">amor</span>
+            <HiHeart aria-hidden className="inline-block h-3.5 w-3.5 animate-heartbeat text-red-500" />
+            {" "}por{" "}
+            <a
+              href="https://central.profbt.com.br"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-navy-100/70 no-underline transition-colors hover:text-white"
+            >
+              Prof. Bruno Carvalho
+            </a>
+          </p>
           <p className="flex items-center gap-1">
             <HiOfficeBuilding className="h-3.5 w-3.5" />
             Educação pública, gratuita e de qualidade.

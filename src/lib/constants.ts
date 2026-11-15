@@ -8,6 +8,17 @@ export function withBasePath(path: string) {
   return `${BASE_PATH}${path}`;
 }
 
+export const FOUNDATION_YEAR = 1946;
+export const FOUNDATION_MONTH = 4;
+
+export function computeSchoolAge(now: Date = new Date()): number {
+  const hadAnniversary = now.getMonth() + 1 >= FOUNDATION_MONTH;
+
+  return now.getFullYear() - FOUNDATION_YEAR - (hadAnniversary ? 0 : 1);
+}
+
+export const SCHOOL_AGE = computeSchoolAge();
+
 export type ModalItem = { title: string; description: string; icon?: string };
 
 export type ModalSection = { title: string; intro?: string; items: ModalItem[]; highlight?: boolean };
@@ -36,8 +47,8 @@ export const SCHOOL = {
   email: "ldavicenterijo@escola.pr.gov.br",
   instagram: "@cevicenterijo_oficial",
   instagramUrl: "https://www.instagram.com/cevicenterijo_oficial",
-  founded: 1946,
-  celebration: 80,
+  founded: FOUNDATION_YEAR,
+  celebration: SCHOOL_AGE,
   areaM2: "25.541",
   students: "1.000+",
   teachers: "100+",
@@ -485,6 +496,14 @@ export const STRUCTURE = [
   { icon: "classroom", title: "30+ salas climatizadas", desc: "Conforto o ano todo" },
 ];
 
+function enrollmentYear(now: Date = new Date()): number {
+  const year = now.getFullYear();
+
+  return now.getMonth() >= 9 ? year + 1 : year;
+}
+
+export const MATRICULAS_YEAR = enrollmentYear();
+
 export const MATRICULAS_STEPS = [
   {
     title: "Manifestação de interesse",
@@ -498,7 +517,7 @@ export const MATRICULAS_STEPS = [
   },
   {
     title: "Confirmação da vaga",
-    desc: "A secretaria analisa e confirma a vaga. Rematrículas acontecem em novembro e dezembro.",
+    desc: "A secretaria analisa e confirma a vaga. Rematrículas acontecem entre outubro e dezembro.",
   },
 ];
 
@@ -527,7 +546,7 @@ export const MATRICULAS_FAQ = [
   },
   {
     q: "Quando é a rematrícula?",
-    a: "As rematrículas dos alunos já matriculados acontecem em novembro e dezembro de cada ano.",
+    a: "As rematrículas dos alunos já matriculados acontecem entre outubro e dezembro de cada ano.",
   },
 ];
 

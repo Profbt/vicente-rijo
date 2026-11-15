@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { withBasePath } from "@/lib/constants";
+import { SCHOOL, SCHOOL_AGE, withBasePath } from "@/lib/constants";
+import SchoolAge from "@/components/ui/SchoolAge";
 import { useEffect, useRef, useState } from "react";
 import { HiHeart } from "react-icons/hi";
 
@@ -61,7 +62,7 @@ export default function Hero() {
       <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-4 pb-20 pt-16 text-center sm:px-6 lg:pt-24">
         <span className="inline-flex items-center gap-2 rounded-full border border-gold-400/20 bg-gold-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold-300">
           <span className="h-1.5 w-1.5 rounded-full bg-gold-400" />
-          Desde 1946 · 80 anos
+          Desde {SCHOOL.founded} · <SchoolAge initial={SCHOOL_AGE} /> anos
         </span>
 
         <h1 className="mt-7 font-display text-5xl font-bold leading-[1.05] text-white text-balance sm:text-6xl lg:text-[4rem]">
@@ -77,9 +78,10 @@ export default function Hero() {
           className="mt-7 max-w-xl text-lg leading-relaxed text-white/60 sm:text-xl"
           style={{ textShadow: "0 2px 8px rgba(0,0,0,.7)" }}
         >
-          Um dos maiores colégios estaduais do Paraná, com 80 anos formando
-          gerações. Fundamental Integral, ensino técnico e médio, estrutura
-          completa e um lugar seguro para o seu filho crescer.
+          Um dos maiores colégios estaduais do Paraná, com{" "}
+          <SchoolAge initial={SCHOOL_AGE} /> anos formando gerações. Fundamental
+          Integral, ensino técnico e médio, estrutura completa e um lugar seguro
+          para o seu filho crescer.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">

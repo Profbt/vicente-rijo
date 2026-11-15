@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { BASE_PATH } from "@/lib/constants";
+import { BASE_PATH, SCHOOL_AGE } from "@/lib/constants";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,11 +20,11 @@ const playfair = Playfair_Display({
 const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL ?? (BASE_PATH ? "https://profbt.github.io" : "https://vicenterijo.com.br");
 const metadataBase = new URL(siteOrigin);
 const siteUrl = new URL(BASE_PATH || "/", metadataBase);
-const socialImage = new URL(`${BASE_PATH}/og-image.png`, metadataBase).toString();
+const socialImage = new URL(`${BASE_PATH}/og.png`, metadataBase).toString();
 
 export const metadata: Metadata = {
   metadataBase,
-  title: "Colégio Estadual Vicente Rijo · 80 anos em Londrina",
+  title: `Colégio Estadual Vicente Rijo · ${SCHOOL_AGE} anos em Londrina`,
   description:
     "O Vicente Rijo: um dos maiores colégios estaduais do Paraná. Ensino Fundamental Integral, Técnico (Administração e Desenvolvimento de Sistemas) e Médio. Estrutura completa, esporte e APMF que cuida de tudo.",
   keywords: [
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "Colégio Estadual Vicente Rijo · 80 anos",
+    title: `Colégio Estadual Vicente Rijo · ${SCHOOL_AGE} anos`,
     description:
       "Educação pública de qualidade para o seu filho. Fundamental Integral, Técnicos, Médio e uma estrutura de respeito.",
     locale: "pt_BR",
@@ -54,24 +54,16 @@ export const metadata: Metadata = {
     images: [
       {
         url: socialImage,
-        width: 512,
-        height: 512,
+        width: 1200,
+        height: 630,
         type: "image/png",
-        alt: "Colégio Estadual Vicente Rijo · 80 anos em Londrina",
+        alt: "Colégio Estadual Vicente Rijo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Colégio Estadual Vicente Rijo · 80 anos",
-    description:
-      "Educação pública de qualidade para o seu filho. Fundamental Integral, Técnicos, Médio e uma estrutura de respeito.",
-    images: [
-      {
-        url: socialImage,
-        alt: "Colégio Estadual Vicente Rijo · 80 anos em Londrina",
-      },
-    ],
+    images: [socialImage],
   },
 };
 

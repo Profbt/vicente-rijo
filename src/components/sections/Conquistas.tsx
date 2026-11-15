@@ -1,7 +1,8 @@
 import Image from "next/image";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import { withBasePath } from "@/lib/constants";
+import { SCHOOL_AGE, withBasePath } from "@/lib/constants";
+import SchoolAge from "@/components/ui/SchoolAge";
 
 const FACTS = [
   {
@@ -32,7 +33,13 @@ export default function Conquistas() {
           dark
           eyebrow="Conquistas"
           title="O orgulho de Londrina dentro e fora de campo"
-          description="O Vicente Rijo é sinônimo de vitória. Ao longo de 80 anos, o colégio construiu uma tradição esportiva e intelectual que enche os pais de orgulho."
+          description={
+            <>
+              O Vicente Rijo é sinônimo de vitória. Ao longo de{" "}
+              <SchoolAge initial={SCHOOL_AGE} /> anos, o colégio construiu uma
+              tradição esportiva e intelectual que enche os pais de orgulho.
+            </>
+          }
         />
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">

@@ -9,7 +9,8 @@ import {
   HiPhotograph,
   HiArrowLeft,
 } from "react-icons/hi";
-import { SCHOOL, withBasePath } from "@/lib/constants";
+import { SCHOOL, withBasePath, MATRICULAS_YEAR } from "@/lib/constants";
+import EnrollmentYear from "@/components/ui/EnrollmentYear";
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -134,7 +135,7 @@ export default function ContatoPage() {
 
             <div className="rounded-3xl bg-navy-950 p-8">
               <h2 className="font-display text-2xl font-semibold text-white">
-                Matrículas 2026
+                Matrículas <EnrollmentYear initial={MATRICULAS_YEAR} />
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-navy-100/75">
                 Leve os documentos do aluno e do responsável à secretaria, das

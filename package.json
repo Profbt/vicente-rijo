@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
+    "prebuild": "node scripts/generate-og.mjs",
     "build": "next build",
-    "deploy": "next build && gh-pages -d out --dotfiles",
+    "deploy": "npm run build && gh-pages -d out --dotfiles",
     "start": "next start",
     "lint": "eslint"
   },
@@ -23,6 +24,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
     "gh-pages": "^6.3.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
