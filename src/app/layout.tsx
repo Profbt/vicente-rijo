@@ -26,9 +26,10 @@ const socialImage = new URL("/og.png", metadataBase).toString();
 
 export const metadata: Metadata = {
   metadataBase,
-  title: `Colégio Estadual Vicente Rijo · ${SCHOOL_AGE} anos em Londrina`,
+  title:
+    "Colégio Estadual Vicente Rijo — Ensino Médio e Técnico em Londrina",
   description:
-    "O Vicente Rijo: um dos maiores colégios estaduais do Paraná. Ensino Fundamental Integral, Técnico (Administração e Desenvolvimento de Sistemas) e Médio. Estrutura completa, esporte e APMF que cuida de tudo.",
+    "Escola estadual no Boa Vista, em Londrina: Fundamental Integral, Ensino Médio e técnicos de Administração e Desenvolvimento de Sistemas. Gratuita.",
   keywords: [
     "Colégio Vicente Rijo",
     "Vicente Rijo",

@@ -62,14 +62,6 @@ export default function Footer() {
                 Contato e matrículas
               </Link>
             </li>
-            <li>
-              <Link
-                href="/"
-                className="inline-flex items-center gap-1.5 text-navy-100/70 transition-colors hover:text-white"
-              >
-                Site completo
-              </Link>
-            </li>
           </ul>
         </div>
 

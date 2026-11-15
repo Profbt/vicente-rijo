@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -22,13 +21,15 @@ import {
 import CopyPixButton from "@/components/ui/CopyPixButton";
 import JsonLd from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 import { SITE_URL } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "APMF · Participe",
+export const metadata = pageMetadata({
+  title: "APMF do Vicente Rijo — contribua e veja a prestação de contas",
   description:
-    "A Associação de Pais, Mestres e Funcionários do Colégio Estadual Vicente Rijo. Contribua com o PIX, participe e veja onde o dinheiro é aplicado.",
-};
+    "A APMF do Colégio Estadual Vicente Rijo, em Londrina: contribua pelo PIX, participe das reuniões e acompanhe a prestação de contas.",
+  path: "/apmf/",
+});
 
 const CAUSE_ICONS = [HiLightningBolt, HiCog, HiStar];
 

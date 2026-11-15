@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -13,12 +12,14 @@ import { SCHOOL, MATRICULAS_YEAR } from "@/lib/constants";
 import EnrollmentYear from "@/components/ui/EnrollmentYear";
 import JsonLd from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contato",
+export const metadata = pageMetadata({
+  title: "Contato e matrículas — Colégio Vicente Rijo, Londrina",
   description:
-    "Fale com a secretaria do Colégio Estadual Vicente Rijo. Matrículas, documentos e informações em Londrina-PR.",
-};
+    "Fale com a secretaria do Colégio Estadual Vicente Rijo, em Londrina: endereço, telefone, horário de atendimento, documentos e matrículas.",
+  path: "/contato/",
+});
 
 export default function ContatoPage() {
   return (

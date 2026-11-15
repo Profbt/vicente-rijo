@@ -71,22 +71,37 @@ try {
 }
 
 if (await exists(SRC)) {
-  const originals = (await walk(SRC)).filter((file) => IMAGE_FILE.test(file));
+  // Dois originais com o mesmo nome e extensões diferentes (esportes.jpg e
+  // esportes.webp) gerariam a mesma variante — o último a rodar venceria e os
+  // bytes mudariam a cada build. Fica o de maior largura, em ordem fixa.
+  const originals = (await walk(SRC))
+    .filter((file) => IMAGE_FILE.test(file))
+    .sort((a, b) => a.localeCompare(b));
 
   if (originals.length === 0) {
     throw new Error(`Nenhuma imagem em ${SRC}`);
   }
 
+  const byStem = new Map();
+  for (const file of originals) {
+    const rel = relative(SRC, file).replaceAll("\\", "/");
+    const stem = rel.replace(IMAGE_FILE, "");
+    const { width } = await sharp(file).metadata();
+    const previous = byStem.get(stem);
+    if (!previous || width > previous.width) {
+      byStem.set(stem, { file, rel, width });
+    }
+  }
+
   const nextManifest = {};
+  const skipped = originals.length - byStem.size;
   let created = 0;
   let reused = 0;
   let bytesIn = 0;
   let bytesOut = 0;
 
-  for (const file of originals) {
-    const rel = relative(SRC, file).replaceAll("\\", "/");
+  for (const { file, rel, width } of byStem.values()) {
     const key = `/img/${rel}`;
-    const { width } = await sharp(file).metadata();
     const widths = variantWidths(width);
 
     bytesIn += (await stat(file)).size;
@@ -114,7 +129,8 @@ if (await exists(SRC)) {
   manifest = sorted;
 
   console.log(
-    `imagens: ${originals.length} originais (${kb(bytesIn)} KB) → ${created} novas + ${reused} reaproveitadas (${kb(bytesOut)} KB)`,
+    `imagens: ${originals.length} originais (${kb(bytesIn)} KB) → ${created} novas + ${reused} reaproveitadas (${kb(bytesOut)} KB)` +
+      (skipped > 0 ? `, ${skipped} ignorada(s) por nome repetido` : ""),
   );
 } else {
   console.log(

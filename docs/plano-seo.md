@@ -262,6 +262,39 @@ uma escola pública estadual — mas o resultado depende do Google.
 **Arquivos:** `src/app/layout.tsx`, `src/app/apmf/page.tsx`, `src/app/contato/page.tsx`,
 opcionalmente `src/app/matriculas/page.tsx` (novo)
 
+**Feito:** titles e descriptions próprios por rota, com o nome da escola e a cidade onde
+cabe:
+
+| Rota | Title | Caracteres |
+|---|---|---|
+| `/` | `Colégio Estadual Vicente Rijo — Ensino Médio e Técnico em Londrina` | 66 |
+| `/apmf/` | `APMF do Vicente Rijo — contribua e veja a prestação de contas` | 61 |
+| `/contato/` | `Contato e matrículas — Colégio Vicente Rijo, Londrina` | 54 |
+
+`src/lib/seo.ts` centraliza `pageMetadata({ title, description, path })`, que devolve
+`title`, `description`, `alternates.canonical` e o `openGraph` completo. O motivo é um bug
+que estava passando: o Next substitui `openGraph` inteiro quando a rota define o seu, então
+`/apmf/` e `/contato/` herdavam o `og:url` da home. Agora cada rota tem canonical e
+`og:url` próprios — conferido com `npm run check:seo`.
+
+H1 único nas três páginas: home (`Hero`), `/apmf/` ("O Vicente Rijo é forte porque a
+comunidade participa") e `/contato/` ("Contato e matrículas"). Hierarquia `h1 → h2 → h3`
+sem salto.
+
+Pedidos fora do plano, feitos na mesma rodada:
+
+- Link "Site completo" removido do rodapé — apontava para a própria home.
+- Imagens dos modais "Saiba mais" das modalidades apontavam para `/img/images/*`, pasta
+  que não existe mais em `public/` desde que os originais saíram do repositório. Eram 404
+  em qualquer tela; no celular o modal ficava só com o gradiente. O `Modal` agora resolve
+  o caminho pelo `imageLoader`, que devolve a variante WebP já gerada.
+- `scripts/optimize-images.mjs`: `esportes.jpg` e `esportes.webp` têm o mesmo nome e
+  geravam a mesma variante — o último a rodar vencia, então os bytes mudavam a cada build
+  e o conteúdo dependia da ordem do sistema de arquivos. Agora vence o original de maior
+  largura, de forma determinística.
+
+**Aberto:** o item 5 (`/matriculas/` como página própria) segue sem decisão.
+
 ---
 
 ## Fase 6 — Busca por IA (AEO/GEO)
