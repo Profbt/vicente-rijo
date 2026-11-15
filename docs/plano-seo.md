@@ -14,7 +14,7 @@ medida antes/depois. O que já foi executado está em "Status de execução".
 | 2 Core Web Vitals | pendente | — |
 | 3 Indexação | **feito (código)** | `robots.txt` e `sitemap.xml` gerados no build e servindo 200; 3 URLs com barra final; Search Console pendente (ação humana) |
 | 4 Dados estruturados | **feito (código)** | `School` em todas as páginas; `FAQPage` na home e em `/apmf/`; `BreadcrumbList` em `/apmf/` e `/contato/`; 2–3 blocos por página, todos JSON válido |
-| 5 On-page local | pendente | — |
+| 5 On-page local | **feito (código)** | 3 titles com nome da escola e cidade; `canonical` e `og:url` próprios por rota; H1 único; `check:seo` sem erro |
 | 6 Busca por IA | pendente | — |
 | 7 Medição | pendente | — |
 
@@ -292,8 +292,15 @@ Pedidos fora do plano, feitos na mesma rodada:
   geravam a mesma variante — o último a rodar vencia, então os bytes mudavam a cada build
   e o conteúdo dependia da ordem do sistema de arquivos. Agora vence o original de maior
   largura, de forma determinística.
+- `InfraCarousel`: os 15 slides passaram a ter título e subtítulo próprios, descrevendo o
+  que a foto mostra (estrutura esportiva, laboratórios, formaturas, eventos). O overlay
+  antes existia em 1 slide só. Enquadramento `4/3` no celular e `21/9` a partir de `sm`,
+  porque `21/9` em tela estreita cortava quase toda a foto. Commit `9704efb`.
 
-**Aberto:** o item 5 (`/matriculas/` como página própria) segue sem decisão.
+**Aberto:** o item 5 (`/matriculas/` como página própria) segue sem decisão. O texto do
+overlay do carrossel só entra no HTML estático para o slide atual (é client-side), então
+não conta como conteúdo indexável — se isso importar, o caminho é listar as legendas
+também em texto visível abaixo do carrossel.
 
 ---
 
