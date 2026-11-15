@@ -20,6 +20,9 @@ import {
   APMF_FAQ,
 } from "@/lib/constants";
 import CopyPixButton from "@/components/ui/CopyPixButton";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "APMF · Participe",
@@ -50,6 +53,15 @@ const HOW_TO_PARTICIPATE = [
 export default function ApmfPage() {
   return (
     <div className="bg-white overflow-hidden">
+      <JsonLd
+        data={[
+          faqSchema(APMF_FAQ, `${SITE_URL}/apmf/`),
+          breadcrumbSchema([
+            { name: "Início", path: "/" },
+            { name: "APMF", path: "/apmf/" },
+          ]),
+        ]}
+      />
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Link
           href="/"

@@ -13,7 +13,7 @@ medida antes/depois. O que já foi executado está em "Status de execução".
 | 1 Imagens | **feito** | 44 originais (63,1 MB) → 114 variantes WebP (8,7 MB); home referencia 83 arquivos; maior servido 329 KB |
 | 2 Core Web Vitals | pendente | — |
 | 3 Indexação | **feito (código)** | `robots.txt` e `sitemap.xml` gerados no build e servindo 200; 3 URLs com barra final; Search Console pendente (ação humana) |
-| 4 Dados estruturados | pendente | — |
+| 4 Dados estruturados | **feito (código)** | `School` em todas as páginas; `FAQPage` na home e em `/apmf/`; `BreadcrumbList` em `/apmf/` e `/contato/`; 2–3 blocos por página, todos JSON válido |
 | 5 On-page local | pendente | — |
 | 6 Busca por IA | pendente | — |
 | 7 Medição | pendente | — |
@@ -44,7 +44,7 @@ Medições feitas em 15/11/2026 contra a produção.
 | `<h1>` na home | 1 ✅ |
 | `robots.txt` | **404** ❌ → gerado no build ✅ |
 | `sitemap.xml` | **404** ❌ → gerado no build ✅ |
-| JSON-LD (dados estruturados) | **ausente** ❌ |
+| JSON-LD (dados estruturados) | **ausente** ❌ → `School` + `FAQPage` + `BreadcrumbList` no build ✅ |
 
 ### Peso
 
@@ -214,8 +214,30 @@ final e batendo com o sitemap.
 **Regra da skill `seo`:** só descrever conteúdo visível na página. Nada de markup para
 "ganhar" rich result que a página não mostra.
 
-**Arquivos:** `src/components/seo/SchoolJsonLd.tsx` (novo) ou inline no `layout.tsx`,
-`src/lib/constants.ts`
+**Arquivos:** `src/lib/schema.ts` (novo), `src/components/seo/JsonLd.tsx` (novo),
+`src/app/layout.tsx`, `src/app/page.tsx`, `src/app/apmf/page.tsx`, `src/app/contato/page.tsx`
+
+**Feito:** `src/lib/schema.ts` expõe `schoolSchema()`, `faqSchema(items, pageUrl)` e
+`breadcrumbSchema(items)`. Todo fato sai de `constants.ts` — nome, endereço, telefone,
+Instagram, `foundingDate` e os nomes dos cursos não são reescritos no schema; só as
+descrições curtas dos cursos são resumos editoriais. O telefone vira E.164
+(`+554333237630`) a partir do mesmo `SCHOOL.phone` que a página exibe.
+
+`School` entra no `layout.tsx` (vale para as 3 rotas, mesmo `@id`
+`https://vicenterijo.com.br/#school`); `FAQPage` na home (4 perguntas de `MATRICULAS_FAQ`)
+e em `/apmf/` (4 de `APMF_FAQ`); `BreadcrumbList` em `/apmf/` e `/contato/`.
+`JsonLd` escapa `<` como `\u003c` para o conteúdo nunca fechar a tag `<script>`.
+
+Medido no build: home 2 blocos, `/apmf/` 3, `/contato/` 2 — todos parseáveis por
+`JSON.parse`, acentuação UTF-8 correta, zero `U+FFFD`. Verificação automatizada:
+`npm run check:jsonld` (lê o `out/` e valida cada bloco).
+
+**Falta (ação humana):** validar no Rich Results Test e no Schema.org Validator depois do
+redeploy. O `FAQPage` só rende rich result em sites de governo/saúde, o que é o caso de
+uma escola pública estadual — mas o resultado depende do Google.
+
+**Verificação:** `npm run check:jsonld` sem erro; Rich Results Test apontando `School` e
+`FAQPage` sem itens críticos.
 
 ---
 

@@ -11,6 +11,8 @@ import {
 } from "react-icons/hi";
 import { SCHOOL, MATRICULAS_YEAR } from "@/lib/constants";
 import EnrollmentYear from "@/components/ui/EnrollmentYear";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -21,6 +23,12 @@ export const metadata: Metadata = {
 export default function ContatoPage() {
   return (
     <div className="bg-cream">
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Início", path: "/" },
+          { name: "Contato", path: "/contato/" },
+        ])}
+      />
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Link
           href="/"

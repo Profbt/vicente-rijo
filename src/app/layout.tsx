@@ -4,6 +4,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { SCHOOL_AGE } from "@/lib/constants";
 import { SITE_URL } from "@/lib/site";
+import { schoolSchema } from "@/lib/schema";
+import JsonLd from "@/components/seo/JsonLd";
 import "./globals.css";
 
 const inter = Inter({
@@ -78,6 +80,7 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white">
+        <JsonLd data={schoolSchema()} />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

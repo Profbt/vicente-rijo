@@ -11,10 +11,15 @@ import Matriculas from "@/components/sections/Matriculas";
 import Apmf from "@/components/sections/Apmf";
 import Cta from "@/components/sections/Cta";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import JsonLd from "@/components/seo/JsonLd";
+import { MATRICULAS_FAQ } from "@/lib/constants";
+import { faqSchema } from "@/lib/schema";
+import { SITE_URL } from "@/lib/site";
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={faqSchema(MATRICULAS_FAQ, `${SITE_URL}/`)} />
       <Hero />
       <Why />
       <Fundamental />
