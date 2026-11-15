@@ -8,8 +8,10 @@ for (const file of files) {
   console.log("=== " + file + " ===");
   let m;
   let count = 0;
+  let bytes = 0;
   while ((m = re.exec(html))) {
     count++;
+    bytes += m[0].length;
     const node = JSON.parse(m[1].replace(/\\u003c/g, "<"));
     const type = node["@type"];
     if (type === "FAQPage") {
@@ -23,5 +25,5 @@ for (const file of files) {
       console.log("  " + type + " @" + node["@id"] + " name=" + node.name);
     }
   }
-  console.log("  total de blocos: " + count);
+  console.log("  total de blocos: " + count + " (" + bytes + " bytes de JSON-LD)");
 }
