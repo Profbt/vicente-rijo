@@ -1,27 +1,16 @@
 import type { NextConfig } from "next";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
-  basePath,
-  assetPrefix: basePath || undefined,
   turbopack: {
     root: __dirname,
   },
   images: {
-    unoptimized: true,
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.pexels.com",
-      },
-    ],
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+    deviceSizes: [480, 960, 1600],
+    imageSizes: [64, 128, 256],
   },
 };
 

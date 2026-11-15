@@ -3,11 +3,11 @@ import { HiAcademicCap, HiStar } from "react-icons/hi";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Modal from "@/components/ui/Modal";
 import Reveal from "@/components/ui/Reveal";
-import { MEDIO, withBasePath } from "@/lib/constants";
+import { MEDIO } from "@/lib/constants";
 
 export default function Medio() {
   return (
-    <section className="bg-white py-20 sm:py-24">
+    <section id="medio" className="scroll-mt-20 bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="Ensino Médio Regular"
@@ -20,7 +20,7 @@ export default function Medio() {
             <article className="mx-auto flex max-w-4xl flex-col overflow-hidden rounded-3xl border border-navy-100 bg-cream sm:flex-row">
               <div className="relative h-48 sm:h-auto sm:w-2/5">
                 <Image
-                  src={withBasePath("/img/images/NEM-alunos.png")}
+                  src={"/img/images/NEM-alunos.png"}
                   alt="Alunos do Ensino Médio Regular do Colégio Vicente Rijo"
                   width={400}
                   height={400}

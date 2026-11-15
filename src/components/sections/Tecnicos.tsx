@@ -3,11 +3,11 @@ import { HiCheck, HiBriefcase } from "react-icons/hi";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Modal from "@/components/ui/Modal";
 import Reveal from "@/components/ui/Reveal";
-import { TECNICOS, withBasePath } from "@/lib/constants";
+import { TECNICOS } from "@/lib/constants";
 
 const COURSE_IMAGES: Record<string, string> = {
-  ADM: withBasePath("/img/images/NEMADM-alunos.png"),
-  DS: withBasePath("/img/images/NEMSIS-alunos.png"),
+  ADM: "/img/images/NEMADM-alunos.png",
+  DS: "/img/images/NEMSIS-alunos.png",
 };
 
 const BADGE_LABELS: Record<string, string> = {

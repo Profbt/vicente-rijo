@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { SCHOOL, SCHOOL_AGE, withBasePath } from "@/lib/constants";
+import { SCHOOL, SCHOOL_AGE } from "@/lib/constants";
 import SchoolAge from "@/components/ui/SchoolAge";
 import { useEffect, useRef, useState } from "react";
 import { HiHeart } from "react-icons/hi";
@@ -49,7 +49,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-[600px] overflow-hidden bg-navy-950 lg:min-h-[700px]">
       <Image
-        src={withBasePath("/img/hero/fachada.webp")}
+        src={"/img/hero/fachada.webp"}
         alt="Fachada do Colégio Estadual Vicente Rijo"
         fill
         priority

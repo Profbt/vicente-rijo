@@ -4,7 +4,7 @@ import { HiHeart, HiCash, HiEye, HiChat } from "react-icons/hi";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import CopyPixButton from "@/components/ui/CopyPixButton";
-import { APMF, APMF_CAUSES, withBasePath } from "@/lib/constants";
+import { APMF, APMF_CAUSES } from "@/lib/constants";
 
 const TRANSPARENCY = [
   {
@@ -64,7 +64,7 @@ export default function Apmf() {
               <div className="mt-8 flex flex-col items-center gap-6">
                 <div className="rounded-2xl bg-white p-4 shadow-lg">
                   <Image
-                    src={withBasePath("/img/images/qrcode_apmf.png")}
+                    src={"/img/images/qrcode_apmf.png"}
                     alt="QR Code PIX APMF"
                     width={180}
                     height={180}

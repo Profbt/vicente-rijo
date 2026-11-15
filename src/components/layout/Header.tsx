@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { HiMenu, HiX, HiExternalLink } from "react-icons/hi";
-import { withBasePath } from "@/lib/constants";
 
 const LINKS = [
   { label: "Por que o VR", href: "/#por-que" },
@@ -77,7 +76,7 @@ export default function Header() {
           onClick={() => setOpen(false)}
         >
           <Image
-            src={withBasePath("/img/brand/logo_escola.png")}
+            src={"/img/brand/logo_escola.png"}
             alt="Logo do Colégio Estadual Vicente Rijo"
             width={40}
             height={40}

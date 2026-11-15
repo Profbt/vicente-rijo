@@ -3,7 +3,7 @@ import { HiStar } from "react-icons/hi";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Modal from "@/components/ui/Modal";
 import Reveal from "@/components/ui/Reveal";
-import { NAAHS, withBasePath } from "@/lib/constants";
+import { NAAHS } from "@/lib/constants";
 
 export default function Naahs() {
   return (
@@ -19,7 +19,7 @@ export default function Naahs() {
           <article className="mx-auto flex max-w-4xl flex-col overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-sm sm:flex-row">
             <div className="relative h-56 sm:h-auto sm:w-2/5">
               <Image
-                src={withBasePath("/img/images/naahs.png")}
+                src={"/img/images/naahs.png"}
                 alt="Sala do NAAHS: atendimento a altas habilidades"
                 width={400}
                 height={400}

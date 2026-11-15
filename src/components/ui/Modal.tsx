@@ -37,7 +37,6 @@ import {
 } from "react-icons/hi";
 import type { IconType } from "react-icons";
 import type { ModalData, ModalItem } from "@/lib/constants";
-import { withBasePath } from "@/lib/constants";
 
 const ITEM_ICONS: Record<string, IconType> = {
   briefcase: HiBriefcase,
@@ -213,7 +212,7 @@ export default function Modal({
         >
           {data.image && (
             <img
-              src={withBasePath(data.image)}
+              src={data.image}
               alt={data.title}
               className="modal-image-in absolute inset-0 h-full w-full object-cover"
               style={{ objectPosition: data.imagePosition ?? "center 25%" }}

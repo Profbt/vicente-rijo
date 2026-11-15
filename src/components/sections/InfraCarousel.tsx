@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { withBasePath } from "@/lib/constants";
 
 type Slide =
   | {
@@ -88,7 +87,7 @@ export default function InfraCarousel() {
             }`}
           >
             <Image
-              src={withBasePath(slide.src)}
+              src={slide.src}
               alt={slide.alt}
               fill
               sizes="(max-width: 1152px) 100vw, 1152px"

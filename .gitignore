@@ -8,3 +8,8 @@ next-env.d.ts
 graphify-out
 --full-page
 .env.local
+
+# Originais ficam FORA do repositório (local-only, ~63 MB).
+# As variantes geradas em public/img/opt SÃO versionadas, para o build
+# funcionar em qualquer clone. Ver scripts/optimize-images.mjs.
+src/assets/originais

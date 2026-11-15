@@ -1,24 +1,24 @@
 import Image from "next/image";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import { SCHOOL_AGE, withBasePath } from "@/lib/constants";
+import { SCHOOL_AGE } from "@/lib/constants";
 import SchoolAge from "@/components/ui/SchoolAge";
 
 const FACTS = [
   {
-    image: withBasePath("/img/images/esportes.jpg"),
+    image: "/img/images/esportes.webp",
     imageAlt: "Atletas do Colégio Vicente Rijo em competição",
     title: "Tradição de campeões",
     desc: "Futebol com raízes no Londrina Esporte Clube, ginástica rítmica e atletas que brilham nos 100m rasos, no ciclismo e no BMX. Um histórico de medalhas e recordes em todo o Paraná.",
   },
   {
-    image: withBasePath("/img/images/mundo.jpg"),
+    image: "/img/images/mundo.jpg",
     imageAlt: "Aluno do Colégio Vicente Rijo em intercâmbio pelo Programa Ganhando o Mundo",
     title: "Ganhando o Mundo",
     desc: "Alunos do Vicente Rijo concorrem a uma vaga pelo programa Ganhando o Mundo, que seleciona por nota e outros critérios. Todo ano temos estudantes escolhidos para estudar no exterior: outro idioma, outra cultura e uma bagagem que levam para a vida.",
   },
   {
-    image: withBasePath("/img/images/esportes2.jpg"),
+    image: "/img/images/esportes2.jpg",
     imageAlt: "Alunos do Colégio Vicente Rijo em atividade esportiva",
     title: "Esporte como formação",
     desc: "Treino, disciplina e superação formam atletas dentro e fora de quadra. O Vicente Rijo é berço de esportistas que hoje competem em clubes e representam o Paraná por todo o país.",

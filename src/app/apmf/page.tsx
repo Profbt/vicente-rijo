@@ -18,7 +18,6 @@ import {
   APMF,
   APMF_CAUSES,
   APMF_FAQ,
-  withBasePath,
 } from "@/lib/constants";
 import CopyPixButton from "@/components/ui/CopyPixButton";
 
@@ -115,7 +114,7 @@ export default function ApmfPage() {
                 </div>
                 <div className="shrink-0 rounded-lg bg-white p-2">
                   <Image
-                    src={withBasePath("/img/images/qrcode_apmf.png")}
+                    src={"/img/images/qrcode_apmf.png"}
                     alt="QR Code PIX APMF"
                     width={80}
                     height={80}

@@ -5,9 +5,11 @@ import {
   HiCheckCircle,
   HiChevronDown,
   HiQuestionMarkCircle,
+  HiArrowNarrowRight,
 } from "react-icons/hi";
 import SectionHeading from "@/components/ui/SectionHeading";
 import EnrollmentYear from "@/components/ui/EnrollmentYear";
+import DocsFlash from "@/components/ui/DocsFlash";
 import {
   MATRICULAS_STEPS,
   DOCS_NECESSARIOS,
@@ -15,9 +17,13 @@ import {
   MATRICULAS_YEAR,
 } from "@/lib/constants";
 
+// Link de âncora rola na mesma página; só link externo abre em nova aba.
+const isHash = (href: string) => href.startsWith("#");
+
 export default function Matriculas() {
   return (
     <section id="matriculas" className="scroll-mt-20 bg-white py-20 sm:py-24">
+      <DocsFlash />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow={
@@ -49,14 +55,39 @@ export default function Matriculas() {
                   <p className="mt-1 text-base leading-relaxed text-navy-800/70">
                     {step.desc}
                   </p>
-                  {step.href ? (
+                  {step.links ? (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {step.links.map((link) =>
+                        // Âncora vira chip discreto; link externo é a ação principal do passo.
+                        isHash(link.href) ? (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            className="rounded-full border border-navy-200 bg-white px-4 py-2 text-sm font-semibold text-navy-900 transition-colors hover:border-gold-400 hover:text-gold-700"
+                          >
+                            {link.label}
+                          </a>
+                        ) : (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-full bg-gold-500 px-6 py-3 text-base font-bold text-navy-950 transition-colors hover:bg-gold-400"
+                          >
+                            {link.label}
+                          </a>
+                        ),
+                      )}
+                    </div>
+                  ) : null}
+                  {step.arrowTo ? (
                     <a
-                      href={step.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 inline-block rounded-full bg-gold-500 px-4 py-1.5 text-xs font-bold text-navy-950 transition-colors hover:bg-gold-400"
+                      href={step.arrowTo}
+                      className="group mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-red-600 transition-colors hover:text-red-700"
                     >
-                      {step.linkLabel}
+                      Documentos necessários
+                      <HiArrowNarrowRight className="h-5 w-5 rotate-90 transition-transform group-hover:translate-x-0.5 lg:rotate-0" />
                     </a>
                   ) : null}
                 </li>
@@ -85,16 +116,29 @@ export default function Matriculas() {
           {/* Coluna direita: Documentos + FAQ */}
           <div className="space-y-8">
             {/* Documentos */}
-            <div className="rounded-3xl border border-navy-100 bg-cream p-7 sm:p-9">
-              <h3 className="flex items-center gap-2 font-display text-xl font-semibold text-navy-950">
-                <HiDocument className="h-6 w-6 text-gold-600" />
-                Documentos necessários
-              </h3>
-              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+            <div
+              id="documentos"
+              className="scroll-mt-28 rounded-3xl border border-navy-100 bg-cream p-7 sm:p-9"
+            >
+              <div className="flex items-start gap-3">
+                <span className="flash-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gold-100 text-gold-600">
+                  <HiDocument className="h-6 w-6" />
+                </span>
+                <div>
+                  <h3 className="font-display text-xl font-semibold text-navy-950">
+                    Documentos necessários
+                  </h3>
+                  <p className="mt-0.5 text-sm text-navy-800/60">
+                    {DOCS_NECESSARIOS.length} itens: confira tudo antes de ir à
+                    secretaria.
+                  </p>
+                </div>
+              </div>
+              <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
                 {DOCS_NECESSARIOS.map((doc) => (
                   <li
                     key={doc}
-                    className="flex items-start gap-2.5 rounded-xl bg-white px-4 py-3 text-sm text-navy-900 shadow-sm"
+                    className="flex items-start gap-2.5 rounded-xl border border-navy-100 bg-white px-4 py-3 text-sm text-navy-900 transition-colors hover:border-gold-300"
                   >
                     <HiCheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-gold-500" />
                     {doc}
@@ -105,10 +149,19 @@ export default function Matriculas() {
 
             {/* FAQ */}
             <div className="rounded-3xl border border-navy-100 bg-cream p-7 sm:p-9">
-              <h3 className="flex items-center gap-2 font-display text-xl font-semibold text-navy-950">
-                <HiQuestionMarkCircle className="h-6 w-6 text-gold-600" />
-                Perguntas frequentes
-              </h3>
+              <div className="flex items-start gap-3">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gold-100 text-gold-600">
+                  <HiQuestionMarkCircle className="h-6 w-6" />
+                </span>
+                <div>
+                  <h3 className="font-display text-xl font-semibold text-navy-950">
+                    Perguntas frequentes
+                  </h3>
+                  <p className="mt-0.5 text-sm text-navy-800/60">
+                    Dúvidas comuns sobre a matrícula.
+                  </p>
+                </div>
+              </div>
               <div className="mt-5 space-y-3">
                 {MATRICULAS_FAQ.map((item) => (
                   <details

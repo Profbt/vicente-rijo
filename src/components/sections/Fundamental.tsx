@@ -2,7 +2,7 @@ import Image from "next/image";
 import { HiCheckCircle, HiClock } from "react-icons/hi";
 import Modal from "@/components/ui/Modal";
 import Reveal from "@/components/ui/Reveal";
-import { FUNDAMENTAL, withBasePath } from "@/lib/constants";
+import { FUNDAMENTAL } from "@/lib/constants";
 
 export default function Fundamental() {
   return (
@@ -11,7 +11,7 @@ export default function Fundamental() {
         <Reveal className="self-start">
           <div className="relative p-4 sm:p-6 lg:p-8">
             <Image
-              src={withBasePath("/img/images/fundamental-alunos.png")}
+              src={"/img/images/fundamental-alunos.png"}
               alt="Alunos do Ensino Fundamental Integral do Colégio Vicente Rijo"
               width={640}
               height={480}
@@ -19,7 +19,7 @@ export default function Fundamental() {
             />
             <div className="absolute -bottom-5 left-6 flex items-center gap-3 rounded-2xl bg-navy-950 px-5 py-3.5 shadow-lg">
               <Image
-                src={withBasePath("/img/brand/parana-integral2.png")}
+                src={"/img/brand/parana-integral2.png"}
                 alt="Programa Paraná Integral"
                 width={36}
                 height={36}

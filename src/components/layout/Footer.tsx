@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { HiLocationMarker, HiMail, HiPhone, HiPhotograph, HiOfficeBuilding, HiHeart } from "react-icons/hi";
-import { SCHOOL, SCHOOL_AGE, withBasePath } from "@/lib/constants";
+import { SCHOOL, SCHOOL_AGE } from "@/lib/constants";
 import SchoolAge from "@/components/ui/SchoolAge";
 
 export default function Footer() {
@@ -11,7 +11,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <Image
-              src={withBasePath("/img/brand/logo_escola.png")}
+              src={"/img/brand/logo_escola.png"}
               alt="Logo do Colégio Estadual Vicente Rijo"
               width={44}
               height={44}

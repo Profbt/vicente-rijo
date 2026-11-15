@@ -9,7 +9,7 @@ import {
   HiPhotograph,
   HiArrowLeft,
 } from "react-icons/hi";
-import { SCHOOL, withBasePath, MATRICULAS_YEAR } from "@/lib/constants";
+import { SCHOOL, MATRICULAS_YEAR } from "@/lib/constants";
 import EnrollmentYear from "@/components/ui/EnrollmentYear";
 
 export const metadata: Metadata = {
@@ -125,7 +125,7 @@ export default function ContatoPage() {
           <div className="flex flex-col gap-6">
             <div className="relative overflow-hidden rounded-3xl border border-navy-100">
               <Image
-                src={withBasePath("/img/hero/fachada.webp")}
+                src={"/img/hero/fachada.webp"}
                 alt="Fachada do Colégio Estadual Vicente Rijo"
                 width={640}
                 height={480}

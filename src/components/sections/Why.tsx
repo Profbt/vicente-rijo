@@ -1,43 +1,42 @@
 import Image from "next/image";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import { withBasePath } from "@/lib/constants";
 
 const REASONS = [
   {
     title: "Segurança em primeiro lugar",
     desc: "Portões controlados e ambiente monitorado 24h. Nós sabemos onde seu filho está e com quem aprende. Programa escola segura do governo do estado do Paraná.",
-    image: withBasePath("/img/images/seguranca2.jpg"),
+    image: "/img/images/seguranca2.jpg",
     imageAlt: "Segurança no Colégio Vicente Rijo: portões controlados e ambiente monitorado",
   },
   {
     title: "Alimentação de verdade",
     desc: "Refeitório para 200 pessoas com merenda de qualidade, refeições balanceadas elaborada e acompanhada por nutricionistas. Ambiente climatizado, limpo e seguro.",
-    image: withBasePath("/img/images/alimentacao.png"),
+    image: "/img/images/alimentacao.png",
     imageAlt: "Refeitório do Colégio Vicente Rijo: merenda de qualidade para os alunos",
   },
   {
     title: "Dia completo para os pequenos",
     desc: "No Fundamental Integral, o aluno fica de 8h às 15h10, com alimentação completa inclusa e ônibus especial que leva as crianças ao Terminal Central após a saída.",
-    image: withBasePath("/img/images/diatodo.png"),
+    image: "/img/images/diatodo.png",
     imageAlt: "Rotina do dia completo no Fundamental Integral do Colégio Vicente Rijo",
   },
   {
     title: "Ensino que abre portas",
     desc: "Fundamental, técnico e médio com professores dedicados, Programa Ganhando o Mundo e centenas de aprovações em vestibulares e pelo programa Aprova Paraná.",
-    image: withBasePath("/img/images/ensino.png"),
+    image: "/img/images/ensino.png",
     imageAlt: "Ensino que abre portas no Colégio Vicente Rijo",
   },
   {
     title: "Esporte e conquistas",
     desc: "Ginásio, quadras, campo profissional e um histórico de campeões que orgulha Londrina. Sede do Acethac (Ginástica Rítmica) e do time sub-15 do Londrina Esporte Clube.",
-    image: withBasePath("/img/images/esporte.png"),
+    image: "/img/images/esporte.png",
     imageAlt: "Estrutura esportiva e conquistas do Colégio Vicente Rijo",
   },
   {
     title: "NAAHS · ir além",
     desc: "Programa exclusivo para alunos com altas habilidades: robótica, ciências, liderança e acompanhamento personalizado. Seu filho pode fazer parte.",
-    image: withBasePath("/img/images/comunidade.png"),
+    image: "/img/images/comunidade.png",
     imageAlt: "Programa NAAHS do Colégio Vicente Rijo: para alunos com altas habilidades",
   },
 ];

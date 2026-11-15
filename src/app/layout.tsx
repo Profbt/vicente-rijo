@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { BASE_PATH, SCHOOL_AGE } from "@/lib/constants";
+import { SCHOOL_AGE } from "@/lib/constants";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -17,10 +18,9 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL ?? (BASE_PATH ? "https://profbt.github.io" : "https://vicenterijo.com.br");
-const metadataBase = new URL(siteOrigin);
-const siteUrl = new URL(BASE_PATH || "/", metadataBase);
-const socialImage = new URL(`${BASE_PATH}/og.png`, metadataBase).toString();
+const metadataBase = new URL(SITE_URL);
+const siteUrl = new URL("/", metadataBase);
+const socialImage = new URL("/og.png", metadataBase).toString();
 
 export const metadata: Metadata = {
   metadataBase,
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
     "APMF",
   ],
   icons: {
-    icon: `${BASE_PATH}/favicon.png`,
-    apple: `${BASE_PATH}/apple-touch-icon.png`,
+    icon: "/favicon.png",
+    apple: "/apple-touch-icon.png",
   },
   alternates: {
     canonical: siteUrl,

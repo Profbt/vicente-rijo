@@ -1,13 +1,3 @@
-export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
-export function withBasePath(path: string) {
-  if (!path.startsWith("/")) {
-    return path;
-  }
-
-  return `${BASE_PATH}${path}`;
-}
-
 export const FOUNDATION_YEAR = 1946;
 export const FOUNDATION_MONTH = 4;
 
@@ -506,14 +496,28 @@ export const MATRICULAS_YEAR = enrollmentYear();
 
 export const MATRICULAS_STEPS = [
   {
+    title: "Escolha o curso",
+    desc: "Antes de manifestar interesse, conheça as opções do colégio: Fundamental Integral, Ensino Médio e cursos técnicos. Escolha o que combina com o seu filho.",
+    links: [
+      { label: "Fundamental Integral", href: "#fundamental" },
+      { label: "Ensino Médio", href: "#medio" },
+      { label: "Cursos técnicos", href: "#ensino" },
+    ],
+  },
+  {
     title: "Manifestação de interesse",
     desc: "Faça a manifestação de interesse pelo site oficial da SEED-PR (Área do Aluno).",
-    href: "https://www.areadoaluno.seed.pr.gov.br/",
-    linkLabel: "Acessar a Área do Aluno",
+    links: [
+      {
+        label: "Acessar a Área do Aluno",
+        href: "https://www.areadoaluno.seed.pr.gov.br/",
+      },
+    ],
   },
   {
     title: "Entrega dos documentos",
     desc: "Leve os documentos do aluno e do responsável à secretaria do colégio, das 8h às 12h.",
+    arrowTo: "#documentos",
   },
   {
     title: "Confirmação da vaga",
