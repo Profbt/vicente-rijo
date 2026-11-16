@@ -11,7 +11,7 @@ medida antes/depois. O que já foi executado está em "Status de execução".
 |---|---|---|
 | 0 Ambiente | **feito** | `basePath` removido; canonical local agora `https://vicenterijo.com.br/` |
 | 1 Imagens | **feito** | 44 originais (63,1 MB) → 133 variantes WebP (9,4 MB); home referencia 83 arquivos; maior servido 329 KB (carrossel 1600 px) |
-| 2 Core Web Vitals | **feito (código)** | Home 2,66 s → **2,00 s** de LCP mobile (mediana, Playwright + CDP); CLS 0; 2 preloads de imagem → 1; logo 77 KB → 20 KB |
+| 2 Core Web Vitals | **feito (código)** | Home 2,66 s → **2,36 s** de LCP mobile em produção (mediana de 5 rodadas); CLS 0; INP lab 120–128 ms; 2 preloads de imagem → 1; logo 77 KB → 20 KB |
 | 3 Indexação | **feito (código)** | `robots.txt` e `sitemap.xml` gerados no build e servindo 200; 3 URLs com barra final; Search Console pendente (ação humana) |
 | 4 Dados estruturados | **feito (código)** | `School` em todas as páginas; `FAQPage` na home e em `/apmf/`; `BreadcrumbList` em `/apmf/` e `/contato/`; 2–3 blocos por página, todos JSON válido |
 | 5 On-page local | **feito (código)** | 3 titles com nome da escola e cidade; `canonical` e `og:url` próprios por rota; H1 único; `check:seo` sem erro |
@@ -193,12 +193,21 @@ do perfil mobile do Lighthouse — com `PerformanceObserver` para LCP e CLS.
 | `/apmf/` | 0,9 s (LH) | 1,48 / 1,78 s | 0 | parágrafo de abertura |
 | `/contato/` | 0,9 s (LH) | 1,26 / 2,05 s | 0 | parágrafo de abertura |
 
-O "depois" foi medido em `localhost` (TTFB 152 ms contra ~250 ms da produção). **Confirmado
-após o redeploy** (Playwright + CDP, mesma configuração, contra a produção): home
-**2,15 / 2,23 / 2,55 s** (mediana 2,23 s) com CLS 0. O HTML servido tem um único preload de
-imagem com `fetchPriority="high"`, logo em 96/192 px e hero em 1020 px.
+O "depois" foi medido em `localhost` (TTFB 152 ms contra ~250 ms da produção) e depois
+**confirmado em produção após o redeploy** (Playwright + CDP, mesma configuração, 5 rodadas
+entre as duas sessões): home **2,15 / 2,23 / 2,36 / 2,55 / 2,66 s**, mediana **2,36 s**, com
+CLS 0. O HTML servido tem um único preload de imagem com `fetchPriority="high"`, logo em
+96/192 px e hero em 1020 px.
 
-**Falta:** o número oficial do PSI (API sem chave devolve 429; a interface web resolve).
+**INP (laboratório, 16/11/2026).** Sem campo (CrUX) e sem PSI, medi a pior interação com
+`PerformanceObserver` de `event`, rede de 1,6 Mbps e CPU 4× mais lenta: **120 ms** na home,
+**120 ms** em `/apmf/` e **128 ms** em `/contato/` — abaixo do limite de 200 ms. É
+candidato a INP, não INP: o valor de campo é o p98 das interações reais.
+
+**Falta (humano): o número oficial do PSI.** A API sem chave devolve 429 mesmo depois do
+deploy (cota compartilhada esgotada) e a automação de navegador do ambiente de deploy não
+tem `libatk-1.0.so.0`. Basta abrir a interface web e rodar mobile nas 3 rotas; os campos a
+registrar são Performance, Accessibility, Best Practices, SEO, LCP, CLS e INP.
 
 **Conferido e já correto:** `sizes` de todas as imagens bate com o grid real (hero `100vw`,
 cards `100vw / 50vw / 33vw`, conquistas `100vw / 33vw`); auditoria `unsized-images` vazia;
@@ -466,7 +475,9 @@ imagens passaram.
 
 | Métrica | Baseline (15/11) | Agora |
 |---|---|---|
-| LCP mobile da home | 2,66 s (Playwright+CDP) | 2,23 s em produção; 1,80–2,10 s no build novo |
+| LCP mobile da home | 2,66 s (Playwright+CDP) | 2,36 s de mediana em produção (2,15–2,66 s, 5 rodadas) |
+| CLS | 0 | 0 nas 3 rotas |
+| INP (lab, pior interação) | não medido | 120–128 ms |
 | CLS | 0 | 0 |
 | Peso de imagem da home | 49,3 MB potenciais | 133 variantes, 9,4 MB publicados |
 | Maior imagem servida | 3,28 MB | 329 KB (carrossel 1600 px) |
@@ -507,3 +518,13 @@ imagens passaram.
    `constants.ts` ou o que você confirmar.
 5. **Resultado de índice e ranking não é imediato** — Google leva dias a semanas para
    reprocessar. Métrica confiável vem do Search Console, não de busca manual.
+6. **Dependências com CVE conhecida** — `npm audit` no commit `42a79d1` aponta 15
+   vulnerabilidades (1 crítica, 7 altas, 7 moderadas). A crítica é o `next` 16.2.2
+   (Server Actions, Image Optimization API, middleware, cache poisoning); as altas vêm de
+   `sharp`/libvips, `postcss`, `js-yaml`, `nanoid`, `source-map-js` e `zod`; as moderadas,
+   do toolchain do eslint. **Nenhuma tem superfície neste deploy:** `output: "export"`
+   gera HTML estático servido pelo nginx — não existe servidor Next, Server Actions,
+   middleware, ISR nem Image Optimization API (o loader é customizado e as imagens já saem
+   prontas do build). O risco residual é de build: `sharp` processa imagem de origem
+   confiável, em máquina de desenvolvimento. Mesmo assim, bump de patch em `next` e
+   `sharp`, em commit separado, é barato e vale a pena.
