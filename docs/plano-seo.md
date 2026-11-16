@@ -518,13 +518,10 @@ imagens passaram.
    `constants.ts` ou o que você confirmar.
 5. **Resultado de índice e ranking não é imediato** — Google leva dias a semanas para
    reprocessar. Métrica confiável vem do Search Console, não de busca manual.
-6. **Dependências com CVE conhecida** — `npm audit` no commit `42a79d1` aponta 15
-   vulnerabilidades (1 crítica, 7 altas, 7 moderadas). A crítica é o `next` 16.2.2
-   (Server Actions, Image Optimization API, middleware, cache poisoning); as altas vêm de
-   `sharp`/libvips, `postcss`, `js-yaml`, `nanoid`, `source-map-js` e `zod`; as moderadas,
-   do toolchain do eslint. **Nenhuma tem superfície neste deploy:** `output: "export"`
-   gera HTML estático servido pelo nginx — não existe servidor Next, Server Actions,
-   middleware, ISR nem Image Optimization API (o loader é customizado e as imagens já saem
-   prontas do build). O risco residual é de build: `sharp` processa imagem de origem
-   confiável, em máquina de desenvolvimento. Mesmo assim, bump de patch em `next` e
-   `sharp`, em commit separado, é barato e vale a pena.
+6. **Dependências** — `npm audit` no commit `42a79d1` apontava 15 vulnerabilidades (1
+   crítica, 7 altas, 7 moderadas). Resolvido em 16/11/2026: `next` e `eslint-config-next`
+   subiram de 16.2.2 para 16.4.6 (o crítico era o `next`) e o `npm audit fix` cuidou de
+   `source-map-js` e `zod`. Sobraram **7 moderadas**, todas no toolchain do
+   `@typescript-eslint` (só rodam no lint, nunca em produção); sair delas exige `eslint` 10,
+   que é major e fica para quando houver motivo. O `package-lock.json` foi validado com
+   `npm ci` limpo.
