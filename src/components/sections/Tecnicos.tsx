@@ -22,7 +22,7 @@ export default function Tecnicos() {
         <SectionHeading
           eyebrow="Ensino Médio Técnico"
           title="Profissão antes do diploma: os cursos técnicos do Vicente Rijo"
-          description="Três anos de formação que colocam o seu filho à frente, com um diploma técnico reconhecido e portas abertas para o mercado de trabalho. Nosso foco é a empregabilidade."
+          description="O Vicente Rijo oferece dois cursos técnicos integrados ao Ensino Médio: Administração e Desenvolvimento de Sistemas. As aulas são no período da manhã, das 7h30 às 12h50, e o aluno se forma com diploma técnico ao fim dos três anos."
         />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-2">

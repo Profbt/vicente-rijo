@@ -41,9 +41,10 @@ export default function Fundamental() {
             Um dia inteiro de aprendizado, esporte e cuidado para o seu filho
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/85 sm:text-lg">
-            No modelo integral, o aluno passa o dia inteiro na escola, estudando,
-            brincando e aprendendo a conviver. Alimentação inclusa e ônibus especial
-            que leva seu filho ao Terminal Central na saída, às 15h10, para você trabalhar tranquilo.
+            O Fundamental Integral do Vicente Rijo é em tempo integral, das 8h às
+            15h10, com 35 horas semanais, três refeições e ônibus especial até o
+            Terminal Central na saída. O aluno passa o dia na escola estudando,
+            brincando e aprendendo a conviver, enquanto você trabalha tranquilo.
           </p>
 
           <div className="mt-6 inline-flex items-center gap-3 rounded-full bg-gold-400 px-6 py-3 text-base font-bold text-navy-950 shadow-lg shadow-navy-950/20">

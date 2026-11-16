@@ -48,7 +48,7 @@ export default function Why() {
         <SectionHeading
           eyebrow="Por que o Vicente Rijo"
           title="O lugar certo para o seu filho crescer"
-          description="O Vicente Rijo é mais que uma escola: é um espaço de segurança, cuidado e oportunidade, mantido pela comunidade que o ama."
+          description="O Vicente Rijo é um colégio estadual gratuito em Londrina que atende os anos finais do Fundamental Integral, o Ensino Médio e dois cursos técnicos integrados ao médio. São 25.541 m² de estrutura, professores com mestrado e doutorado e uma comunidade que participa."
         />
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {REASONS.map((reason, i) => (

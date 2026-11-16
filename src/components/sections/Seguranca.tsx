@@ -30,7 +30,7 @@ export default function Seguranca() {
         <SectionHeading
           eyebrow="Para os pais"
           title="Tranquilidade para você, segurança para ele"
-          description="Sabemos que, mais do que ensino, você entrega o seu filho na nossa porta todos os dias. A gente leva isso muito a sério."
+          description="O colégio tem portões controlados, ambiente monitorado 24h e o Programa Escola Segura do Paraná. O refeitório climatizado atende 200 alunos com refeições balanceadas por nutricionistas, e o corpo docente inclui pedagogos e professores de apoio."
         />
 
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

@@ -34,7 +34,7 @@ export default function Infra() {
         <SectionHeading
           eyebrow="Estrutura"
           title="Uma estrutura incomparável"
-          description="Mais de 25 mil metros quadrados de área total no coração de Londrina, com 12,5 mil m² construídos: espaço, conforto e tecnologia para o aprendizado acontecer de verdade."
+          description="A estrutura tem 25.541 m² de área total e 12,5 mil m² construídos: ginásio com arquibancada para 1.000+ pessoas, quatro quadras, campo de futebol, seis laboratórios de informática, três de ciências, biblioteca, salão de eventos e refeitório para 200 pessoas."
         />
 
         <Reveal className="mt-14">

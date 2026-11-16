@@ -5,8 +5,9 @@ import { SITE_URL } from "@/lib/site";
 // "output: export" (metadata routes precisam ser explicitamente estáticas).
 export const dynamic = "force-static";
 
-// Crawlers de busca por IA (GPTBot, ClaudeBot, PerplexityBot, Google-Extended)
-// não são bloqueados: o site quer ser citado nessas respostas.
+// Crawlers de busca por IA (OAI-SearchBot, PerplexityBot, Claude-SearchBot,
+// meta-webindexer) estão liberados pelo wildcard abaixo. Não criar grupo nominal:
+// um grupo com User-agent específico substitui as regras do "*" para aquele bot.
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/" },

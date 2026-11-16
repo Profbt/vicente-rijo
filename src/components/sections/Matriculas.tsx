@@ -16,6 +16,9 @@ import {
   DOCS_NECESSARIOS,
   MATRICULAS_FAQ,
   MATRICULAS_YEAR,
+  FUNDAMENTAL,
+  MEDIO,
+  TECNICOS,
 } from "@/lib/constants";
 
 // Link de âncora rola na mesma página; só link externo abre em nova aba.
@@ -33,7 +36,7 @@ export default function Matriculas() {
             </>
           }
           title="Matrícula simples, sem surpresas"
-          description="O ensino é 100% gratuito. Veja como garantir a vaga do seu filho no Vicente Rijo."
+          description="A matrícula é gratuita e começa pela manifestação de interesse na Área do Aluno da SEED-PR. Depois é só levar os documentos à secretaria, que atende das 8h às 16h30. São quatro passos até a vaga confirmada."
         />
 
         <div className="mt-14 grid gap-10 lg:grid-cols-2">
@@ -181,6 +184,42 @@ export default function Matriculas() {
               </div>
             </div>
           </div>
+        </div>
+        {/* Tabela comparativa: motor de resposta cita tabela melhor que prosa. */}
+        <div className="mt-12 overflow-hidden rounded-3xl border border-navy-100">
+          <table className="w-full text-left text-sm sm:text-base">
+            <caption className="bg-navy-950 px-5 py-4 text-left font-display text-lg font-semibold text-white">
+              Modalidades, horários e turno
+            </caption>
+            <thead className="bg-navy-900 text-xs uppercase tracking-wider text-navy-100/80">
+              <tr>
+                <th scope="col" className="px-5 py-3 font-semibold">Modalidade</th>
+                <th scope="col" className="px-5 py-3 font-semibold">Horário</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-navy-100 bg-white">
+              <tr>
+                <th scope="row" className="px-5 py-4 font-semibold text-navy-950">
+                  Fundamental Anos Finais · Integral
+                </th>
+                <td className="whitespace-nowrap px-5 py-4 text-navy-800/80">{FUNDAMENTAL.schedule}</td>
+              </tr>
+              <tr>
+                <th scope="row" className="px-5 py-4 font-semibold text-navy-950">
+                  {MEDIO.name}
+                </th>
+                <td className="whitespace-nowrap px-5 py-4 text-navy-800/80">{MEDIO.schedule}</td>
+              </tr>
+              {TECNICOS.map((curso) => (
+                <tr key={curso.code}>
+                  <th scope="row" className="px-5 py-4 font-semibold text-navy-950">
+                    Técnico em {curso.name} · integrado ao médio
+                  </th>
+                  <td className="whitespace-nowrap px-5 py-4 text-navy-800/80">{curso.schedule}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </section>

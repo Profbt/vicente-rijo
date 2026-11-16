@@ -53,7 +53,7 @@ export function schoolSchema(): Record<string, unknown> {
       addressCountry: "BR",
     },
     areaServed: { "@type": "City", name: SCHOOL.city },
-    sameAs: [SCHOOL.instagramUrl],
+    sameAs: [SCHOOL.instagramUrl, SCHOOL.seedUrl],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",

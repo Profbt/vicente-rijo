@@ -41,7 +41,7 @@ export default function Apmf() {
           dark
           eyebrow="APMF · Associação de Pais, Mestres e Funcionários"
           title="O Vicente Rijo é forte porque a comunidade participa"
-          description="O governo garante a escola. A APMF garante o brilho. Com uma contribuição pequena por mês, você faz a diferença direto na vida do seu filho."
+          description="A APMF é a associação de pais, mestres e funcionários do colégio: contribuição voluntária de R$ 20 por mês, CNPJ próprio e prestação de contas aberta. O valor vai para ônibus de visitas escolares, manutenções urgentes e eventos."
         />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-5">

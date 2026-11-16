@@ -35,9 +35,11 @@ export default function Conquistas() {
           title="O orgulho de Londrina dentro e fora de campo"
           description={
             <>
-              O Vicente Rijo é sinônimo de vitória. Ao longo de{" "}
-              <SchoolAge initial={SCHOOL_AGE} /> anos, o colégio construiu uma
-              tradição esportiva e intelectual que enche os pais de orgulho.
+              O colégio é sede do Acethac (ginástica rítmica) e do time sub-15 do
+              Londrina Esporte Clube, e tem alunos escolhidos todos os anos no
+              programa Ganhando o Mundo. Ao longo de{" "}
+              <SchoolAge initial={SCHOOL_AGE} /> anos, essa tradição esportiva e
+              intelectual virou orgulho para Londrina.
             </>
           }
         />

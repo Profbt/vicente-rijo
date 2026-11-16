@@ -15,7 +15,7 @@ medida antes/depois. O que já foi executado está em "Status de execução".
 | 3 Indexação | **feito (código)** | `robots.txt` e `sitemap.xml` gerados no build e servindo 200; 3 URLs com barra final; Search Console pendente (ação humana) |
 | 4 Dados estruturados | **feito (código)** | `School` em todas as páginas; `FAQPage` na home e em `/apmf/`; `BreadcrumbList` em `/apmf/` e `/contato/`; 2–3 blocos por página, todos JSON válido |
 | 5 On-page local | **feito (código)** | 3 titles com nome da escola e cidade; `canonical` e `og:url` próprios por rota; H1 único; `check:seo` sem erro |
-| 6 Busca por IA | pendente | — |
+| 6 Busca por IA | **feito (código)** | respostas citáveis nas 10 seções; tabela modalidades × horário; `sameAs` com SEED-PR; `robots.txt` wildcard (1 grupo nomeado substituiria o `*`); 2 divergências de NAP apontadas |
 | 7 Medição | pendente | — |
 
 Decisões tomadas: GitHub Pages **encerrado** (produção é o Coolify em vicenterijo.com.br);
@@ -382,6 +382,50 @@ Estrutura da skill `ai-seo`: **estrutura, autoridade, presença**.
 "escola com ensino médio integral Londrina"…) no ChatGPT, Perplexity e Google AI
 Overviews e registrar se o site é citado. Repetir a cada 2 meses.
 
+**Feito (código)**
+
+- **Respostas citáveis.** Cada seção da home passou a abrir com 1–2 frases autocontidas,
+  antes do texto de venda: "O Vicente Rijo é um colégio estadual gratuito em Londrina que
+  atende os anos finais do Fundamental Integral, o Ensino Médio e dois cursos técnicos…"
+  (`Why`), "…é em tempo integral, das 8h às 15h10, com 35 horas semanais, três refeições e
+  ônibus até o Terminal Central" (`Fundamental`), "…dois cursos técnicos integrados ao
+  Ensino Médio: Administração e Desenvolvimento de Sistemas… 7h30 às 12h50" (`Tecnicos`),
+  e o mesmo em `Medio`, `Infra`, `Conquistas`, `Seguranca`, `Matriculas` e `Apmf`. O
+  `NAAHS` já abria com a definição do polo regional.
+- **Tabela comparativa** "Modalidades, horários e turno" na seção de matrículas: quatro
+  linhas (Fundamental Integral, Ensino Médio, Técnico em ADM, Técnico em DS). Os horários
+  saem de `FUNDAMENTAL.schedule`, `MEDIO.schedule` e `TECNICOS[].schedule` — nada digitado
+  na tabela.
+- **`sameAs`** agora liga Instagram e a página oficial do colégio no Consulta Escolas da
+  SEED-PR (`SCHOOL.seedUrl`). A URL foi verificada sem o `windowId` de sessão: abre o
+  cadastro do "Vicente Rijo, C E-Ef Eti Em P".
+- **`robots.txt`**: mantido `User-agent: * / Allow: /`, sem grupos nominais. Um grupo com
+  `OAI-SearchBot` (ou qualquer bot nomeado) **substitui** as regras do `*` para aquele
+  agente — então listar os três crawlers de busca por IA só adicionaria risco de exclusão
+  futura, não permissão. O comentário no arquivo registra isso para o próximo que for
+  "consertar".
+- **Horário** centralizado em `SCHOOL.secretaria` (commit anterior): página, texto de
+  matrícula e `openingHoursSpecification` leem da mesma fonte.
+
+**Auditoria NAP (16/11/2026, site × Consulta Escolas da SEED-PR)**
+
+| Campo | Site | SEED-PR | Situação |
+|---|---|---|---|
+| Nome | Colégio Estadual Vicente Rijo | Vicente Rijo, C E-Ef Eti Em P | mesma entidade (nome oficial abreviado) |
+| Endereço | Av. Juscelino Kubitscheck, 2372 | Av Juscelino Kubitscheck, 2372 | ✅ |
+| CEP | 86020-000 | 86.020-000 | ✅ (confirmado por você) |
+| Telefone | (43) 3323-7630 | (43) 3323-7630 | ✅ |
+| E-mail | ldavicenterijo@escola.pr.gov.br | ldavicenterijo@seed.pr.gov.br | **divergente** |
+| Bairro | Boa Vista | Centro | **divergente** (o Censo/INEP diz Vila Ipiranga) |
+
+Os dois divergentes não foram alterados: são dado institucional e a decisão é sua. O bairro
+afeta `PostalAddress` (`addressLocality` está certo; bairro não entra no schema hoje) e o
+link do Google Maps; o e-mail aparece em `/contato/`, no rodapé e no `School.email`.
+
+**Falta (humano):** Google Business Profile atualizado (fonte primária de resposta local),
+e a rodada manual de citações no ChatGPT/Perplexity/AI Overviews.
+
+
 ---
 
 ## Fase 7 — Medição e rotina
@@ -404,7 +448,7 @@ Overviews e registrar se o site é citado. Repetir a cada 2 meses.
 | LCP mobile | 2,66 s | **< 2,5 s** (build novo: 2,00 s) ✅ |
 | CLS | 0 | **< 0,1** ✅ |
 | `robots.txt` / `sitemap.xml` | 404 | **200** ✅ (build local) |
-| Páginas com JSON-LD | 0 | **3** |
+| Páginas com JSON-LD | 0 | **3** ✅ |
 
 ---
 

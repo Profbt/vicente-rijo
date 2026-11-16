@@ -37,6 +37,9 @@ export const SCHOOL = {
   email: "ldavicenterijo@escola.pr.gov.br",
   instagram: "@cevicenterijo_oficial",
   instagramUrl: "https://www.instagram.com/cevicenterijo_oficial",
+  // Página oficial do colégio no Consulta Escolas da SEED-PR (fonte do sameAs).
+  seedUrl:
+    "https://www.consultaescolas.pr.gov.br/consultaescolas/pages/templates/initial2.xhtml?codigoEstab=10&codigoMunicipio=1380",
   founded: FOUNDATION_YEAR,
   celebration: SCHOOL_AGE,
   // Fonte única do horário da secretaria: a página, o texto de matrícula e o
@@ -169,6 +172,7 @@ export const TECNICOS = [
   {
     name: "Administração",
     code: "ADM",
+    schedule: "7h30 às 12h50",
     description:
       "Aprenda a gerir empresas, finanças, rotinas administrativas e atendimento: uma porta de entrada para o mercado e o empreendedorismo. Com noções de RH, marketing e logística, o aluno desenvolve postura profissional, organização e visão estratégica para atuar com segurança no ambiente empresarial.",
     topics: ["Rotinas administrativas", "Gestão financeira", "Atendimento ao cliente", "Recursos Humanos"],
@@ -243,6 +247,7 @@ export const TECNICOS = [
   {
     name: "Desenvolvimento de Sistemas",
     code: "DS",
+    schedule: "7h30 às 12h50",
     description:
       "Programe, crie sites e aplicativos e conheça as tecnologias que movem o mundo digital, a profissão mais procurada da década. Com certificações intermediárias ao final de cada série e contato com banco de dados, mobile e Inteligência Artificial, o aluno sai do Ensino Médio pronto para o mercado de tecnologia.",
     topics: ["Programação", "Desenvolvimento web", "Lógica e robótica", "Banco de dados", "Desenvolvimento mobile"],
@@ -334,8 +339,9 @@ export const TECNICOS = [
 
 export const MEDIO = {
   name: "Ensino Médio Regular",
+  schedule: "7h30 às 12h50",
   description:
-    "Formação completa com foco em ENEM, vestibulares e desenvolvimento integral, com o suporte da nossa estrutura e dos nossos professores.",
+    "O Ensino Médio regular do Vicente Rijo é matutino, das 7h30 às 12h50, com dois itinerários formativos: Linguagens e Ciências Humanas, e Matemática e Ciências da Natureza. A rotina é voltada para ENEM, UEL, UFPR e Prova Paraná.",
   highlight: "Preparação para ENEM e vestibulares",
   details: {
     eyebrow: "Ensino Médio Regular",
