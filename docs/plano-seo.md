@@ -10,13 +10,13 @@ medida antes/depois. O que já foi executado está em "Status de execução".
 | Fase | Estado | Medido |
 |---|---|---|
 | 0 Ambiente | **feito** | `basePath` removido; canonical local agora `https://vicenterijo.com.br/` |
-| 1 Imagens | **feito** | 44 originais (63,1 MB) → 133 variantes WebP (9,3 MB); home referencia 83 arquivos; maior servido 321 KB (hero 1020 px) |
+| 1 Imagens | **feito** | 44 originais (63,1 MB) → 133 variantes WebP (9,4 MB); home referencia 83 arquivos; maior servido 329 KB (carrossel 1600 px) |
 | 2 Core Web Vitals | **feito (código)** | Home 2,66 s → **2,00 s** de LCP mobile (mediana, Playwright + CDP); CLS 0; 2 preloads de imagem → 1; logo 77 KB → 20 KB |
 | 3 Indexação | **feito (código)** | `robots.txt` e `sitemap.xml` gerados no build e servindo 200; 3 URLs com barra final; Search Console pendente (ação humana) |
 | 4 Dados estruturados | **feito (código)** | `School` em todas as páginas; `FAQPage` na home e em `/apmf/`; `BreadcrumbList` em `/apmf/` e `/contato/`; 2–3 blocos por página, todos JSON válido |
 | 5 On-page local | **feito (código)** | 3 titles com nome da escola e cidade; `canonical` e `og:url` próprios por rota; H1 único; `check:seo` sem erro |
 | 6 Busca por IA | **feito (código)** | respostas citáveis nas 10 seções; tabela modalidades × horário; `sameAs` com SEED-PR; `robots.txt` wildcard (1 grupo nomeado substituiria o `*`); 2 divergências de NAP apontadas |
-| 7 Medição | pendente | — |
+| 7 Medição | **feito (código)** | `npm run check:prod` cobre 3 rotas + robots/sitemap/llms + 88 imagens; rotina e números no fim do documento |
 
 Decisões tomadas: GitHub Pages **encerrado** (produção é o Coolify em vicenterijo.com.br);
 domínio próprio mantido na raiz, sem subpasta.
@@ -179,7 +179,7 @@ banda. As ações abaixo atacaram exatamente isso.
 | Removido o preload do 1º slide do carrossel (fica `lazy`, como os outros 14) | `InfraCarousel.tsx` | −104 KB em prioridade alta antes da dobra |
 | Variantes 96 e 192 px para imagens de origem < 600 px; logo do header e do rodapé passam a pedir 96/192 em vez de 480 | `scripts/optimize-images.mjs`, `image-variants.json` | logo 77 KB → 20 KB |
 | `fetchPriority="high"` + `sizes="100vw"` explícito no hero | `Hero.tsx` | fecha o item `priorityHinted` do Lighthouse |
-| Foto do hero trocada pela versão 1020×1541 (era 676×1020); variante 676 órfã removida | `../originais-vicente-rijo/hero/fachada.webp`, `public/img/opt/hero` | nitidez no desktop sem custo de LCP (medido) |
+| Foto do hero trocada pela versão 1020×1542 em PNG (a anterior era 676×1020); variante 676 órfã removida | `../originais-vicente-rijo/hero/fachada.png`, `public/img/opt/hero` | nitidez no desktop sem custo de LCP (medido) |
 
 **Medição.** PageSpeed Insights por API devolveu 429 (sem chave, cota anônima) e o modo
 `simulate` do Lighthouse ficou inconsistente nesta página (LCP simulado de 5,6 s contra
@@ -399,11 +399,16 @@ Overviews e registrar se o site é citado. Repetir a cada 2 meses.
 - **`sameAs`** agora liga Instagram e a página oficial do colégio no Consulta Escolas da
   SEED-PR (`SCHOOL.seedUrl`). A URL foi verificada sem o `windowId` de sessão: abre o
   cadastro do "Vicente Rijo, C E-Ef Eti Em P".
-- **`robots.txt`**: mantido `User-agent: * / Allow: /`, sem grupos nominais. Um grupo com
-  `OAI-SearchBot` (ou qualquer bot nomeado) **substitui** as regras do `*` para aquele
-  agente — então listar os três crawlers de busca por IA só adicionaria risco de exclusão
-  futura, não permissão. O comentário no arquivo registra isso para o próximo que for
-  "consertar".
+- **`robots.txt`**: wildcard `Allow: /` mais três grupos nominais (`OAI-SearchBot`,
+  `PerplexityBot`, `Claude-SearchBot`) com `Allow: /` — pedido seu, e o efeito é o mesmo do
+  wildcard. Fica registrado o detalhe que morde depois: **um grupo nomeado substitui as
+  regras do `*` para aquele bot**, então qualquer bloqueio futuro precisa ser escrito dentro
+  do grupo do bot, não no `*`.
+- **`llms.txt`** gerado no build (`src/app/llms.txt/route.ts`), não como arquivo estático.
+  O motivo é o mesmo do JSON-LD: endereço, telefone, horário, modalidades e FAQ saem de
+  `constants.ts`, então o arquivo não tem como divergir do site. Conteúdo: resumo do
+  colégio, contato, modalidades e horários, links das 3 páginas e as 4 perguntas de
+  matrícula. Segue o formato do llmstxt.org (H1, resumo em blockquote, seções).
 - **Horário** centralizado em `SCHOOL.secretaria` (commit anterior): página, texto de
   matrícula e `openingHoursSpecification` leem da mesma fonte.
 
@@ -415,12 +420,11 @@ Overviews e registrar se o site é citado. Repetir a cada 2 meses.
 | Endereço | Av. Juscelino Kubitscheck, 2372 | Av Juscelino Kubitscheck, 2372 | ✅ |
 | CEP | 86020-000 | 86.020-000 | ✅ (confirmado por você) |
 | Telefone | (43) 3323-7630 | (43) 3323-7630 | ✅ |
-| E-mail | ldavicenterijo@escola.pr.gov.br | ldavicenterijo@seed.pr.gov.br | **divergente** |
-| Bairro | Boa Vista | Centro | **divergente** (o Censo/INEP diz Vila Ipiranga) |
+| E-mail | ldavicenterijo@escola.pr.gov.br | ldavicenterijo@seed.pr.gov.br | site correto (confirmado); cadastro da SEED desatualizado |
+| Bairro | Boa Vista | Centro | site correto (confirmado); Censo/INEP ainda diz Vila Ipiranga |
 
-Os dois divergentes não foram alterados: são dado institucional e a decisão é sua. O bairro
-afeta `PostalAddress` (`addressLocality` está certo; bairro não entra no schema hoje) e o
-link do Google Maps; o e-mail aparece em `/contato/`, no rodapé e no `School.email`.
+Os dois divergentes foram confirmados por você como corretos no site, então nada mudou no
+código. O cadastro da SEED-PR é que está desatualizado — não dá para corrigir daqui.
 
 **Falta (humano):** Google Business Profile atualizado (fonte primária de resposta local),
 e a rodada manual de citações no ChatGPT/Perplexity/AI Overviews.
@@ -435,6 +439,40 @@ e a rodada manual de citações no ChatGPT/Perplexity/AI Overviews.
 3. Search Console: cobertura, consultas, CTR por página.
 4. Rotina pós-deploy (checklist curto): sitemap responde 200, imagens novas entraram no
    pipeline, nenhum 404 novo, canonical correto.
+
+**Feito (código): `npm run check:prod`.** Roda contra a produção (ou contra qualquer base,
+`npm run check:prod -- http://localhost:4173`) e falha com código 1 se algo sair do ar:
+
+- nas 3 rotas: status 200, `canonical` igual à URL, no máximo 1 preload de imagem (a home
+  precisa de exatamente 1, com `fetchpriority=high`), todo JSON-LD parseável;
+- `/robots.txt`, `/sitemap.xml` e `/llms.txt` respondendo 200 com o conteúdo esperado;
+- todas as imagens `/img/opt/*.webp` referenciadas nas 3 páginas em 200 (hoje: 88). Um 404
+  de variante só aparece depois do deploy — esse é o check que pega.
+
+Estado em 16/11/2026 contra a produção (antes do redeploy desta rodada): 1 problema —
+`/llms.txt` 404, porque ainda não estava no ar. Rotas, canonical, JSON-LD, preload e as 88
+imagens passaram.
+
+**Rotina proposta**
+
+| Quando | O quê |
+|---|---|
+| Depois de cada redeploy | `npm run check:prod` |
+| Mensal | PSI mobile nas 3 rotas (interface web ou chave de API) e anotar na tabela |
+| Semanal | Search Console: cobertura e consultas |
+| A cada 2 meses | 5 perguntas no ChatGPT/Perplexity/AI Overviews, 3 rodadas cada |
+
+**Números até aqui**
+
+| Métrica | Baseline (15/11) | Agora |
+|---|---|---|
+| LCP mobile da home | 2,66 s (Playwright+CDP) | 2,23 s em produção; 1,80–2,10 s no build novo |
+| CLS | 0 | 0 |
+| Peso de imagem da home | 49,3 MB potenciais | 133 variantes, 9,4 MB publicados |
+| Maior imagem servida | 3,28 MB | 329 KB (carrossel 1600 px) |
+| `robots.txt` / `sitemap.xml` | 404 | 200 ✅ |
+| `llms.txt` | não existia | gerado no build; falta redeploy |
+| JSON-LD | 0 páginas | 3 páginas ✅ |
 
 ---
 
