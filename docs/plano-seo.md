@@ -10,8 +10,8 @@ medida antes/depois. O que já foi executado está em "Status de execução".
 | Fase | Estado | Medido |
 |---|---|---|
 | 0 Ambiente | **feito** | `basePath` removido; canonical local agora `https://vicenterijo.com.br/` |
-| 1 Imagens | **feito** | 44 originais (63,1 MB) → 114 variantes WebP (8,7 MB); home referencia 83 arquivos; maior servido 329 KB |
-| 2 Core Web Vitals | pendente | — |
+| 1 Imagens | **feito** | 44 originais (63,1 MB) → 133 variantes WebP (9,3 MB); home referencia 83 arquivos; maior servido 321 KB (hero 1020 px) |
+| 2 Core Web Vitals | **feito (código)** | Home 2,66 s → **2,00 s** de LCP mobile (mediana, Playwright + CDP); CLS 0; 2 preloads de imagem → 1; logo 77 KB → 20 KB |
 | 3 Indexação | **feito (código)** | `robots.txt` e `sitemap.xml` gerados no build e servindo 200; 3 URLs com barra final; Search Console pendente (ação humana) |
 | 4 Dados estruturados | **feito (código)** | `School` em todas as páginas; `FAQPage` na home e em `/apmf/`; `BreadcrumbList` em `/apmf/` e `/contato/`; 2–3 blocos por página, todos JSON válido |
 | 5 On-page local | **feito (código)** | 3 titles com nome da escola e cidade; `canonical` e `og:url` próprios por rota; H1 único; `check:seo` sem erro |
@@ -168,6 +168,46 @@ continuando versionados no repo. O que é publicado são só os derivados.
 
 **Referência usada:** skill `core-web-vitals` (`references/LCP.md`) — medir a subparte
 do LCP antes de otimizar, não aplicar receita genérica.
+
+**Feito.** Primeiro achado, que muda a leitura do problema: **o elemento de LCP da home
+não é o hero, é o `<h1>`**. O gradiente escuro (`from-navy-950/85` … `to-navy-950/95`)
+cobre a foto e o Chrome descarta a imagem como candidata — ela conta só como disputa de
+banda. As ações abaixo atacaram exatamente isso.
+
+| Mudança | Arquivo | Efeito |
+|---|---|---|
+| Removido o preload do 1º slide do carrossel (fica `lazy`, como os outros 14) | `InfraCarousel.tsx` | −104 KB em prioridade alta antes da dobra |
+| Variantes 96 e 192 px para imagens de origem < 600 px; logo do header e do rodapé passam a pedir 96/192 em vez de 480 | `scripts/optimize-images.mjs`, `image-variants.json` | logo 77 KB → 20 KB |
+| `fetchPriority="high"` + `sizes="100vw"` explícito no hero | `Hero.tsx` | fecha o item `priorityHinted` do Lighthouse |
+| Foto do hero trocada pela versão 1020×1541 (era 676×1020); variante 676 órfã removida | `../originais-vicente-rijo/hero/fachada.webp`, `public/img/opt/hero` | nitidez no desktop sem custo de LCP (medido) |
+
+**Medição.** PageSpeed Insights por API devolveu 429 (sem chave, cota anônima) e o modo
+`simulate` do Lighthouse ficou inconsistente nesta página (LCP simulado de 5,6 s contra
+imagem baixada em 52 ms). Protocolo adotado: **Chromium via Playwright + CDP**, viewport
+412×823, DPR 2,625, rede 1,6 Mbps / 150 ms de RTT, CPU 4× mais lenta — mesmos parâmetros
+do perfil mobile do Lighthouse — com `PerformanceObserver` para LCP e CLS.
+
+| Rota | LCP antes (produção) | LCP depois (build novo) | CLS | Elemento de LCP |
+|---|---|---|---|---|
+| `/` | 2,47 / 2,66 s | **1,76 / 2,00 / 2,16 s** | 0 | `<h1>` |
+| `/apmf/` | 0,9 s (LH) | 1,48 / 1,78 s | 0 | parágrafo de abertura |
+| `/contato/` | 0,9 s (LH) | 1,26 / 2,05 s | 0 | parágrafo de abertura |
+
+O "depois" foi medido em `localhost` (TTFB 152 ms contra ~250 ms da produção), então o
+número pós-deploy deve ficar alguns décimos acima. **Falta:** rodar o PSI oficial depois
+do redeploy — precisa de chave de API ou da interface web.
+
+**Conferido e já correto:** `sizes` de todas as imagens bate com o grid real (hero `100vw`,
+cards `100vw / 50vw / 33vw`, conquistas `100vw / 33vw`); auditoria `unsized-images` vazia;
+CLS 0 nas três rotas.
+
+**Não feito de propósito:** preload de fonte, CSS crítico e code-splitting. Medido o
+caminho: CSS bloqueante custa 742 ms e o `bootup-time` 2,6 s sob CPU 4×, mas o LCP já
+fechou abaixo da meta. Fica para quando houver número de campo.
+
+**Efeito colateral a observar:** a foto nova é mais clara e o parágrafo do hero
+(`text-white/60`) fica sobre a fachada. Se a leitura incomodar, o ajuste é uma linha no
+gradiente (`from-navy-950/85` → `/90`), não uma mudança de layout.
 
 ---
 
@@ -353,8 +393,8 @@ Overviews e registrar se o site é citado. Repetir a cada 2 meses.
 | Imagens na home (peso) | 49,3 MB | **< 2,5 MB** |
 | Maior imagem servida | 3,28 MB | **< 200 KB** |
 | `public/` em imagens | 63,4 MB | publicação **< 8 MB** |
-| LCP mobile | não medido | **< 2,5 s** |
-| CLS | não medido | **< 0,1** |
+| LCP mobile | 2,66 s | **< 2,5 s** (build novo: 2,00 s) ✅ |
+| CLS | 0 | **< 0,1** ✅ |
 | `robots.txt` / `sitemap.xml` | 404 | **200** ✅ (build local) |
 | Páginas com JSON-LD | 0 | **3** |
 
@@ -365,7 +405,7 @@ Overviews e registrar se o site é citado. Repetir a cada 2 meses.
 1. **Espelho do GitHub Pages** — resolvido: Pages encerrado, produção única no Coolify.
 2. **Repo com 63 MB de origem** — resolvido: os originais saíram do repositório e ficam em
    `../originais-vicente-rijo/` (local-only, fora do git). As variantes geradas em
-   `public/img/opt/` (8,6 MB) são versionadas, então clone e build no Coolify funcionam sem
+   `public/img/opt/` (9,3 MB) são versionadas, então clone e build no Coolify funcionam sem
    os originais. `scripts/optimize-images.mjs` e `generate-og.mjs` detectam a ausência da
    pasta e reaproveitam o que está versionado; o `ORIGINALS_DIR` aponta para outro caminho
    quando precisar regenerar. O histórico do git ainda guarda os 63 MB antigos — só um

@@ -53,6 +53,8 @@ export default function Hero() {
         alt="Fachada do Colégio Estadual Vicente Rijo"
         fill
         priority
+        fetchPriority="high"
+        sizes="100vw"
         className="object-cover object-center"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-950/85 via-navy-950/70 to-navy-950/95" />

@@ -195,7 +195,6 @@ export default function InfraCarousel() {
               alt={slide.alt}
               fill
               sizes="(max-width: 1152px) 100vw, 1152px"
-              preload={i === 0}
               className="object-cover"
             />
           </div>

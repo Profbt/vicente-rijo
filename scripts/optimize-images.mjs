@@ -17,7 +17,11 @@ const SRC = process.env.ORIGINALS_DIR ?? join(root, "..", "originais-vicente-rij
 const OUT = join(root, "public", "img", "opt");
 const MANIFEST = join(root, "src", "lib", "image-variants.json");
 const WIDTHS = [480, 960, 1600];
-const QUALITY = { 480: 80, 960: 76, 1600: 70 };
+// Logos e selos aparecem a 40–56 px; sem uma variante pequena o loader entrega
+// a de 480 px (~76 KB) no caminho crítico por causa de um ícone de 40 px.
+const SMALL_WIDTHS = [96, 192];
+const SMALL_LIMIT = 600;
+const QUALITY = { 96: 82, 480: 80, 960: 76, 1600: 70 };
 const IMAGE_FILE = /\.(png|jpe?g|webp)$/i;
 
 async function exists(path) {
@@ -42,6 +46,7 @@ async function walk(dir) {
 
 function variantWidths(intrinsicWidth) {
   const widths = WIDTHS.filter((w) => w <= intrinsicWidth);
+  if (intrinsicWidth < SMALL_LIMIT) widths.unshift(...SMALL_WIDTHS);
 
   // Imagem menor que o maior breakpoint: guarda também a largura nativa, senão
   // o navegador pede 1600 e recebe só 480 (borrado em tela grande).

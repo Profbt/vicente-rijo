@@ -1,18 +1,25 @@
 {
   "/img/brand/logo_escola.png": [
+    96,
+    192,
     480,
     512
   ],
   "/img/brand/parana-integral2.png": [
+    96,
+    192,
     338
   ],
   "/img/brand/selo_80_anos.png": [
+    96,
+    192,
     480,
     507
   ],
   "/img/hero/fachada.webp": [
     480,
-    676
+    960,
+    1020
   ],
   "/img/hero/vicente-rijo-aerea-1.jpg": [
     480,
@@ -133,6 +140,8 @@
     1122
   ],
   "/img/images/gmundo1.jpg": [
+    96,
+    192,
     447
   ],
   "/img/images/gmundo2.jpg": [
@@ -146,6 +155,8 @@
     1376
   ],
   "/img/images/naahs.png": [
+    96,
+    192,
     480,
     500
   ],
@@ -155,6 +166,8 @@
     1122
   ],
   "/img/images/NEM-alunos.png": [
+    96,
+    192,
     480,
     500
   ],
@@ -164,10 +177,14 @@
     1024
   ],
   "/img/images/NEM-alunos2.png": [
+    96,
+    192,
     480,
     500
   ],
   "/img/images/NEMADM-alunos.png": [
+    96,
+    192,
     480,
     500
   ],
@@ -186,6 +203,8 @@
     1122
   ],
   "/img/images/qrcode_apmf.png": [
+    96,
+    192,
     280
   ],
   "/img/images/seguranca.png": [
