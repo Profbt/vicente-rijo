@@ -26,8 +26,7 @@ const socialImage = new URL("/og.png", metadataBase).toString();
 
 export const metadata: Metadata = {
   metadataBase,
-  title:
-    "Colégio Estadual Vicente Rijo — Ensino Médio e Técnico em Londrina",
+  title: "Vicente Rijo — Ensino Integral, Médio e Técnico em Londrina",
   description:
     "Escola estadual no Boa Vista, em Londrina: Fundamental Integral, Ensino Médio e técnicos de Administração e Desenvolvimento de Sistemas. Gratuita.",
   keywords: [

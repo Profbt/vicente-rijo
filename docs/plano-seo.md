@@ -319,7 +319,7 @@ cabe:
 
 | Rota | Title | Caracteres |
 |---|---|---|
-| `/` | `Colégio Estadual Vicente Rijo — Ensino Médio e Técnico em Londrina` | 66 |
+| `/` | `Vicente Rijo — Ensino Integral, Médio e Técnico em Londrina` | 59 |
 | `/apmf/` | `APMF do Vicente Rijo — contribua e veja a prestação de contas` | 61 |
 | `/contato/` | `Contato e matrículas — Colégio Vicente Rijo, Londrina` | 54 |
 
