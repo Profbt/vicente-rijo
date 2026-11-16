@@ -39,6 +39,14 @@ export const SCHOOL = {
   instagramUrl: "https://www.instagram.com/cevicenterijo_oficial",
   founded: FOUNDATION_YEAR,
   celebration: SCHOOL_AGE,
+  // Fonte única do horário da secretaria: a página, o texto de matrícula e o
+  // JSON-LD (openingHoursSpecification) leem daqui.
+  secretaria: {
+    short: "8h às 16h30",
+    label: "Segunda a sexta, das 8h às 16h30",
+    opens: "08:00",
+    closes: "16:30",
+  },
   areaM2: "25.541",
   students: "1.000+",
   teachers: "100+",
@@ -516,7 +524,7 @@ export const MATRICULAS_STEPS = [
   },
   {
     title: "Entrega dos documentos",
-    desc: "Leve os documentos do aluno e do responsável à secretaria do colégio, das 8h às 12h.",
+    desc: `Leve os documentos do aluno e do responsável à secretaria do colégio, das ${SCHOOL.secretaria.short}.`,
     arrowTo: "#documentos",
   },
   {

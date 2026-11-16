@@ -124,7 +124,7 @@ export default function ContatoPage() {
                     Horário da secretaria
                   </p>
                   <p className="mt-1 text-sm text-navy-800/70">
-                    Segunda a sexta, das 8h às 12h e das 13h às 17h.
+                    {SCHOOL.secretaria.label}.
                   </p>
                 </div>
               </div>
@@ -148,7 +148,7 @@ export default function ContatoPage() {
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-navy-100/75">
                 Leve os documentos do aluno e do responsável à secretaria, das
-                <strong className="text-white"> 8h às 12h</strong>. Ensino 100%
+                <strong className="text-white"> {SCHOOL.secretaria.short}</strong>. Ensino 100%
                 gratuito, sem mensalidade.
               </p>
               <Link

@@ -10,6 +10,7 @@ import {
 import SectionHeading from "@/components/ui/SectionHeading";
 import EnrollmentYear from "@/components/ui/EnrollmentYear";
 import DocsFlash from "@/components/ui/DocsFlash";
+import { SCHOOL } from "@/lib/constants";
 import {
   MATRICULAS_STEPS,
   DOCS_NECESSARIOS,
@@ -100,7 +101,7 @@ export default function Matriculas() {
                 Não sabe por onde começar?
               </h4>
               <p className="mt-2 text-base leading-relaxed text-navy-800/70">
-                A secretaria atende das <strong>8h às 16:30h</strong> na Av.
+                A secretaria atende das <strong>{SCHOOL.secretaria.short}</strong> na Av.
                 Juscelino Kubitscheck, 2372, Boa Vista. Leve os documentos e a
                 equipe te atende com todo o cuidado.
               </p>

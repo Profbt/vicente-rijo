@@ -193,9 +193,12 @@ do perfil mobile do Lighthouse — com `PerformanceObserver` para LCP e CLS.
 | `/apmf/` | 0,9 s (LH) | 1,48 / 1,78 s | 0 | parágrafo de abertura |
 | `/contato/` | 0,9 s (LH) | 1,26 / 2,05 s | 0 | parágrafo de abertura |
 
-O "depois" foi medido em `localhost` (TTFB 152 ms contra ~250 ms da produção), então o
-número pós-deploy deve ficar alguns décimos acima. **Falta:** rodar o PSI oficial depois
-do redeploy — precisa de chave de API ou da interface web.
+O "depois" foi medido em `localhost` (TTFB 152 ms contra ~250 ms da produção). **Confirmado
+após o redeploy** (Playwright + CDP, mesma configuração, contra a produção): home
+**2,15 / 2,23 / 2,55 s** (mediana 2,23 s) com CLS 0. O HTML servido tem um único preload de
+imagem com `fetchPriority="high"`, logo em 96/192 px e hero em 1020 px.
+
+**Falta:** o número oficial do PSI (API sem chave devolve 429; a interface web resolve).
 
 **Conferido e já correto:** `sizes` de todas as imagens bate com o grid real (hero `100vw`,
 cards `100vw / 50vw / 33vw`, conquistas `100vw / 33vw`); auditoria `unsized-images` vazia;
@@ -336,6 +339,11 @@ Pedidos fora do plano, feitos na mesma rodada:
   que a foto mostra (estrutura esportiva, laboratórios, formaturas, eventos). O overlay
   antes existia em 1 slide só. Enquadramento `4/3` no celular e `21/9` a partir de `sm`,
   porque `21/9` em tela estreita cortava quase toda a foto. Commit `9704efb`.
+- Horário da secretaria centralizado em `SCHOOL.secretaria` (`constants.ts`). Estava em
+  quatro lugares com três valores diferentes: `/contato/` dizia "8h às 12h e das 13h às
+  17h", o bloco de matrículas dizia "8h às 12h", a home dizia "8h às 16:30h" e o JSON-LD
+  declarava dois turnos (08–12 e 13–17). Agora tudo lê a mesma fonte: **segunda a sexta,
+  das 8h às 16h30**, e o `openingHoursSpecification` declara um único intervalo 08:00–16:30.
 
 **Aberto:** o item 5 (`/matriculas/` como página própria) segue sem decisão. O texto do
 overlay do carrossel só entra no HTML estático para o slide atual (é client-side), então
