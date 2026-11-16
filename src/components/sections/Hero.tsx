@@ -49,7 +49,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-[600px] overflow-hidden bg-navy-950 lg:min-h-[700px]">
       <Image
-        src={"/img/hero/fachada.webp"}
+        src={"/img/hero/fachada.png"}
         alt="Fachada do Colégio Estadual Vicente Rijo"
         fill
         priority

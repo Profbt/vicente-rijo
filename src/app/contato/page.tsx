@@ -134,7 +134,7 @@ export default function ContatoPage() {
           <div className="flex flex-col gap-6">
             <div className="relative overflow-hidden rounded-3xl border border-navy-100">
               <Image
-                src={"/img/hero/fachada.webp"}
+                src={"/img/hero/fachada.png"}
                 alt="Fachada do Colégio Estadual Vicente Rijo"
                 width={640}
                 height={480}
